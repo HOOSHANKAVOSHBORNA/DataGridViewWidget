@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/DataGridCelDelegate.qml</file>
+        <file>qml/DataGridColumn.qml</file>
+        <file>qml/DataGridColumnBase.qml</file>
+        <file>qml/DataGridColumnBinding.qml</file>
+        <file>qml/DataGridColumnCustom.qml</file>
+        <file>qml/DataGridColumnDelegate.qml</file>
+        <file>qml/DataGridHeader.qml</file>
+        <file>qml/DataGridHeaderLabel.qml</file>
+        <file>qml/DataGridHeaderResizeHandler.qml</file>
+        <file>qml/DataGridLabel.qml</file>
+        <file>qml/DataGridRow.qml</file>
+        <file>qml/DataGridView.qml</file>
+        <file>qml/main.qml</file>
+        <file>qml/qtquickcontrols2.conf</file>
+    </qresource>
+</RCC>
