@@ -38,7 +38,7 @@ ItemDelegate {
                         target: label
                         when: header != null && header.isReady
                         property: "_w"
-                        value: header != null ? header.get(index).width : null
+                        value: header != null ? header.get(index).width : 4
 //                              (index == repeater.count - 1 ? 0 : header.spacing)
 //                               ((index == repeater.count - 1 || index == 0) ? header.spacing / 2 : header.spacing)
                     }

@@ -7,10 +7,10 @@ ListView {
     id: root
 
     //apreance properties
-    property color borderColor: '#9E9E9E'
+    property color borderColor: 'blue'
     property color headerBackgroundColor: 'red'
-    property color backgroundColor: '#FF9800'
-
+    property color backgroundColor1: "#403d39"
+    property color backgroundColor2: '#FFFFFF'
     property bool horizontalLines: true
     property bool verticalLines: true
     property bool headerSepratorLine: horizontalLines
@@ -38,7 +38,10 @@ ListView {
 
     Rectangle {
         anchors.fill: parent
-        color: backgroundColor
+        gradient: Gradient {
+               GradientStop { position: 0.0; color: backgroundColor1}
+               GradientStop { position: 1.0; color: backgroundColor2 }
+           }
         border.color: borderColor
         border.width: 1
         radius: 5
@@ -50,7 +53,7 @@ ListView {
         policy: ScrollBar.AlwaysOn
             contentItem: Rectangle {
                 implicitWidth: 6
-                color: "#FF5722"
+                color: backgroundColor1
                 radius: 10
             }
 
@@ -60,7 +63,8 @@ ListView {
         policy: ScrollBar.AsNeeded
             contentItem: Rectangle {
                 implicitWidth: 6
-                color: "red"
+                color: backgroundColor1
+                radius: 10
             }
     }
 /////

@@ -8,6 +8,8 @@ Label {
     clip: true
     elide: "ElideRight"
     leftPadding: 4
+    color: "black"
+    anchors.centerIn: parent
 
     background: Rectangle {
         color: modelData.color

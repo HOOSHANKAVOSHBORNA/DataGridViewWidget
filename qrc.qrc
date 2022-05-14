@@ -14,5 +14,7 @@
         <file>qml/DataGridView.qml</file>
         <file>qml/main.qml</file>
         <file>qml/qtquickcontrols2.conf</file>
+        <file>qml/Mymenu.qml</file>
+        <file>Btnwidget.qml</file>
     </qresource>
 </RCC>

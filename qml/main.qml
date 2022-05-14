@@ -1,27 +1,29 @@
 import QtQuick 2.12
-import QtQuick.Window 2.12
 import Test 1.0
 import QtQuick.Controls.Material 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 import Qt.labs.settings 1.1
+import QtQuick.Controls.Styles 1.4
+Item {
+    anchors.fill: parent
+    Rectangle{
+        id: rectangle
+        anchors.fill: parent
+        //color: "#5c6b73"
+        radius: 5
 
-
-ApplicationWindow {
-    width: 640
-    height: 480
-    visible: true
-    title: qsTr("Hello World")
-     Material.theme: Material.Dark
     SampleModel {
         id: sampleModel
     }
 
     Settings {
-        property alias horizontalLines: horizontalLinesCheckbox.checked
-        property alias verticalLines: verticalLinesCheckbox.checked
-        property alias seprateHeaderLine: seprateHeaderLineCheckbox.checked
-        property alias fit: fitCheckbox.checked
+
+        property alias fit: menu.fitCheckbox
+        property alias horizontalLines: menu.horizontalLinesCheckbox
+        property alias verticalLines: menu.verticalLinesCheckbox
+        property alias seprateHeaderLine: menu.seprateHeaderLineCheckbox
+        property alias showThirdColumnMenu: menu.showThirdColumnMenu
     }
 
     Component {
@@ -29,7 +31,10 @@ ApplicationWindow {
         Rectangle {
 //            property ListView listView: null
 
-            color: '#9097C0'
+            gradient: Gradient {
+                   GradientStop { position: 0.0; color: "#284b63" }
+                   GradientStop { position: 1.0; color: "#90CAF9" }
+               }
             radius: 15
         //    visible: (listView != null && listView.currentItem != null)
             y: (ListView.view.currentIndex !== -1)
@@ -51,76 +56,28 @@ ApplicationWindow {
 
     }
 
-    menuBar: MenuBar {
-        Menu {
-            title: "View"
-
-            MenuItem {
-                id: horizontalLinesCheckbox
-                text: "Horizontal lines"
-                checkable: true
-            }
-            MenuItem {
-                id: verticalLinesCheckbox
-                text: "Vertical lines"
-                checkable: true
-            }
-            MenuItem {
-                id: seprateHeaderLineCheckbox
-                text: "Sepraete line"
-                checkable: true
-            }
-
-        }
-        Menu {
-            title: "Behavior"
-
-            MenuItem {
-                id: fitCheckbox
-                text: "Fit columns"
-                checked: true
-            }
-            MenuItem {
-                text: "Hilight second col"
-                checkable: true
-                onCheckedChanged: col2.color = checked ? 'yellow' : 'transparent'
-            }
-
-            MenuSeparator {}
-
-            MenuItem {
-                text: "Show selected"
-                onClicked: {
-                    console.log(dataGridView.currentValue.name)
-                }
-            }
-
-            MenuItem {
-                id: showThirdColumnMenu
-                text: "Show third column"
-                checkable: true
-                checked: true
-            }
-        }
-    }
 
 
 
     DataGridView {
         id: dataGridView
-        anchors.fill: parent
+        width: parent.width
+        height: parent.height -45
+        anchors.topMargin: 2
+        //anchors.fill: parent
+        anchors.top: menu.bottom
         anchors.margins: 9
 
         model: sampleModel
 
         borderColor: Material.dropShadowColor
-        headerBackgroundColor: '#EFF7CF'
+        headerBackgroundColor: '#4C4843'
 
-        fitColumns: fitCheckbox.checked
+        fitColumns: menu.fitCheckbox
 
-        horizontalLines: horizontalLinesCheckbox.checked
-        verticalLines: verticalLinesCheckbox.checked
-        headerSepratorLine: seprateHeaderLineCheckbox.checked
+        horizontalLines: menu.horizontalLinesCheckbox
+        verticalLines: menu.verticalLinesCheckbox
+        headerSepratorLine: menu.seprateHeaderLineCheckbox
 
         interactive: true
         highlight: hilightComponent
@@ -135,6 +92,7 @@ ApplicationWindow {
             role: "id"
             title: "Id"
             size: 100
+
             fillWidth: true
         }
         DataGridColumnBinding {
@@ -147,7 +105,7 @@ ApplicationWindow {
             role: "last_name"
             title: "Last name"
             size: 100
-            visible: showThirdColumnMenu.checked
+            visible: menu.showThirdColumnMenu
         }
         DataGridColumnCustom {
             size: 100
@@ -165,14 +123,51 @@ ApplicationWindow {
                    implicitHeight: 25
                    border.color: "#888"
                    radius: 10
-                   color: "#664C9F70"
+                   gradient: Gradient {
+                          GradientStop { position: 0.0; color: "#F44336" }
+                          GradientStop { position: 1.0; color: "#EF9A9A" }
+                      }
                }
                 text: "Remove"
                 anchors.fill:  parent
                 onClicked: console.log("Goint to remove ", parent.model.name, parent.model.last_name)
             }
         }
+        DataGridColumnDelegate {
+            title: "Update button"
+            size: 90
+            delegate: Button {
+               background:Rectangle {
+                   implicitWidth: 100
+                   implicitHeight: 25
+                   border.color: "#888"
+                   radius: 10
+                   gradient: Gradient {
+                          GradientStop { position: 0.0; color: "#3c6e71" }
+                          GradientStop { position: 1.0; color: "#90CAF9" }
+                      }
+               }
+                text: "Updata"
+                anchors.fill:  parent
+                onClicked: console.log("Goint to Add ", parent.model.name, parent.model.last_name)
+            }
+        }
+    }
+    Mymenu{
+        id:menu
+        width: parent.width
+        height: 40
+        anchors.top: parent.top
+        colorclom: col2.color
+
     }
 
+}
 
  }
+
+/*##^##
+Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+##^##*/

@@ -16,7 +16,7 @@ Item {
     Label {
         id: label
         text: modelData.title
-        color: 'gray'
+        color: 'white'
         font.bold: true
         anchors.fill: parent
         anchors.rightMargin: handler.width
