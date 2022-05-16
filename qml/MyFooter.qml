@@ -20,7 +20,7 @@ Rectangle {
             id: styleSelector
             anchors.fill: parent
             onCurrentIndexChanged: {
-                console.log(currentText)
+
             }
             model: [8,32 ,64,100]
             delegate: ItemDelegate {
@@ -33,14 +33,14 @@ Rectangle {
                     verticalAlignment: Text.AlignVCenter
                 }
                 background: Rectangle {
+                    anchors.fill: parent
                     id:item
-                    width: 150
+                    width: 50
                     color: "transparent"
                     radius: 20
 
 
                 }
-                highlighted: styleSelector.highlightedIndex === index
             }
             background: Rectangle {
                 anchors.fill: parent
@@ -48,6 +48,7 @@ Rectangle {
                 border.color: styleSelector.pressed ? "#C0C0C0" : "#FFFFFF"
                 border.width: styleSelector.visualFocus ? 2 : 1
                 radius: 30
+
             }
 
             popup: Popup{
@@ -56,31 +57,55 @@ Rectangle {
                 width: styleSelector.width *2
                 height: styleSelector.height * 6
                 padding: 1
-
+                enter: Transition {
+                          NumberAnimation { property: "height"; duration: 1000;from: 0.0; to: styleSelector.height * 6 }
+                      }
+                exit: Transition {
+                          NumberAnimation { property: "height";duration: 1000 ;from: styleSelector.height * 6 ; to: 0.0 }
+                      }
+                background: Rectangle {
+                    radius: 5
+                    anchors.fill: parent
+                    color: "#88000000"
+                    border.width: 1
+                    border.color:"#95A4A8"
+                }
                 contentItem: ListView {
+
                     id: listview
                     implicitHeight: popup.height
                     clip: true
                     model:styleSelector.delegateModel
                     currentIndex: styleSelector.highlightedIndex
                     interactive: true
-                    highlightMoveDuration: 0
+                    highlightMoveDuration: 5
                     boundsBehavior: ListView.StopAtBounds
+                    highlight: highlight
 
 
                     ScrollBar.vertical:ScrollBar {}
                 }
-                background: Rectangle {
-                    radius: 20
-                    color: "#88000000"
-                    border.width: 1
-                    border.color:"#95A4A8"
-                }
+
             }
 
+            Component {
+                  id: highlight
+                  Rectangle {
+                      width: 10; height: 20
 
+                      color: "#11FFFFFF"; radius: 0
+                      //y: listview.currentItem.y
+                      Behavior on y {
+                          SpringAnimation {
+                              spring: 3
+                              damping: 0.2
+                          }
+                      }
+                  }
+              }
         }
     }
+
     Image {
         id: next
         anchors.right: parent.right

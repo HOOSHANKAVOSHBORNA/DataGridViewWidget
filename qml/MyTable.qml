@@ -18,6 +18,7 @@ import QtQuick.Controls.Styles 1.4
 
         SampleModel {
             id: sampleModel
+
         }
 
         Settings {
