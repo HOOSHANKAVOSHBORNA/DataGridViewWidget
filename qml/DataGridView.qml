@@ -9,8 +9,8 @@ ListView {
     //apreance properties
     property color borderColor: 'blue'
     property color headerBackgroundColor: 'red'
-    property color backgroundColor1: "#403d39"
-    property color backgroundColor2: '#FFFFFF'
+    property color backgroundColor1: "#2c3e50"
+    property color backgroundColor2: '#2980b9'
     property bool horizontalLines: true
     property bool verticalLines: true
     property bool headerSepratorLine: horizontalLines
@@ -38,7 +38,8 @@ ListView {
 
     Rectangle {
         anchors.fill: parent
-        gradient: Gradient {
+        gradient:
+            Gradient {
                GradientStop { position: 0.0; color: backgroundColor1}
                GradientStop { position: 1.0; color: backgroundColor2 }
            }

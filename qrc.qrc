@@ -16,5 +16,32 @@
         <file>qml/qtquickcontrols2.conf</file>
         <file>qml/Mymenu.qml</file>
         <file>Btnwidget.qml</file>
+        <file>icon/icons8-circled-menu-100.png</file>
+        <file>icon/icons8-delete-100.png</file>
+        <file>icon/icons8-edit-64.png</file>
+        <file>icon/icons8-refresh-128.png</file>
+        <file>icon/icons8-delete.png</file>
+        <file>icon/icons8-edit.png</file>
+        <file>icon/icons8-circled-menu-96.png</file>
+        <file>icon/icons8-refresh-64.png</file>
+        <file>icon/icons8-exe-64.png</file>
+        <file>icon/icons8-exe-80.png</file>
+        <file>icon/icons8-pdf-80.png</file>
+        <file>icon/icons8-pdf-100.png</file>
+        <file>qml/SearchBar.qml</file>
+        <file>qml/UIConstants.js</file>
+        <file>icon/icons8-row-96.png</file>
+        <file>icon/icons8-row-100.png</file>
+        <file>qml/MyFooter.qml</file>
+        <file>qml/MyTable.qml</file>
+        <file>icon/icons8-back-to-100.png</file>
+        <file>icon/icons8-back-to-100c.png</file>
+        <file>icon/icons8-next-page-100.png</file>
+        <file>icon/icons8-next-page-100(1).png</file>
+        <file>icon/icons8-refresh-100.png</file>
+        <file>icon/icons8-pdf-100_1.png</file>
+        <file>icon/icons8-exe-100.png</file>
+        <file>icon/icons8-back-to-100(1).png</file>
+        <file>icon/icons8-next-page-100(2).png</file>
     </qresource>
 </RCC>

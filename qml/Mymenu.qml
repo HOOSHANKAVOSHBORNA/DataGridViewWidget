@@ -1,17 +1,22 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.5
 import QtQuick.Dialogs 1.2
+import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.12
+import QtQuick.Controls.Styles 1.4
 Rectangle {
-    property bool  horizontalLinesCheckbox: false
-    property  bool verticalLinesCheckbox: false
-    property  bool seprateHeaderLineCheckbox: false
-    property bool showThirdColumnMenu: true
+    property bool  horizontalLinesCheckbox: horzent.checked
+    property  bool verticalLinesCheckbox: vertical.checked
+    property bool showThirdColumnMenu: lastname.checked
+    property bool showTowColumnMenu: name.checked
+    property bool showoneColumnMenu: id.checked
+
     property bool  fitCheckbox: true
     property color colorclom
     radius: 5
     border.width: 1
     border.color: "gray"
-    color: "#4C4843"
+    color: "#2c3e50"
     id: menu
 
     Rectangle{
@@ -19,370 +24,390 @@ Rectangle {
 
         id:recadd
         anchors.right: parent.right
-        width: 70
+        width: 50
         height: 30
-        radius: 5
+        radius: 15
         anchors.rightMargin: 10
         anchors.verticalCenter: parent.verticalCenter
-        property color gradcolor : "#8BC34A"
-        gradient: Gradient {
-                GradientStop { position: 0.0; color:recadd.gradcolor}
-                GradientStop { position: 1.0; color: "#4CAF50" }
-            }
-        Text {
+        color: "transparent"
+        border.width: 1.2
+        border.color: "white";
+        Image {
             id: add
-            text: qsTr("Add")
-            anchors.centerIn: parent
+            width: 25
+            height: 25
+            anchors.centerIn:parent
+            source: "qrc:/icon/icons8-circled-menu-100.png"
         }
+
         MouseArea{
             anchors.fill: parent
             hoverEnabled: true
             onClicked: {
-               form.show()
+                if(submenu.x===recadd.x -90){
+                    inm2.start()
+                }else
+                    inm1.start()
+
             }
             onEntered: {
-                recadd.gradcolor = "#E6EE9C";
+                add.source ="qrc:/icon/icons8-circled-menu-96.png"
+                recadd.color ="#22FFFFFF"
             }
             onExited: {
-                recadd.gradcolor ="#8BC34A"
+                add.source = "qrc:/icon/icons8-circled-menu-100.png"
+                recadd.color ="transparent"
 
+            }
+
+        }
+
+        NumberAnimation {
+            id : inm1
+            target: submenu
+            property: "x"
+            to :recadd.x -90
+            duration: 1000
+            easing.type: Easing.InOutBack
+        }
+        NumberAnimation {
+            id : inm2
+            target: submenu
+            property: "x"
+            to :recadd.x + 100
+            duration: 1000
+            easing.type: Easing.InCirc
         }
     }
-}
-    Row{
-        id: row
-        anchors.fill: parent
-        Rectangle{
-            id: menu1
-            width: 80
-            height: 35
-            radius: 5
-            anchors.verticalCenter: parent.verticalCenter
-            color: "transparent"
-            Text {
-                text: qsTr("View")
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenter: parent.verticalCenter
-            }
-            MouseArea{
-                anchors.fill: parent
-                onClicked: {
-                      animRect.start()
-                    menubeha.visible= false
+    Rectangle{
+        id:submenu
+        x:recadd.x + 100
+        y:recadd.y +32
+        visible: true
+        radius: 15
+        border.width: 1.2
+
+        color: "#44000000"
+        width: 150
+        height: 300
+
+        ColumnLayout {
+            CheckBox {
+                id : id
+                indicator: Rectangle {
+                    implicitWidth: 24
+                    implicitHeight: 24
+
+                    x: id.leftPadding
+                    y: parent.height / 2 - height / 2
+                    radius: 5
+                    border.color: id.down ? "#2980b9" : "#2980b9"
+
+                    Text {
+                        width: 14
+                        height: 14
+                        x: 1
+                        y: -2
+                        text: "✔"
+                        font.pointSize: 18
+                        color: id.down ? "#2980b9" : "#2980b9"
+                        visible: id.checked
+                    }
                 }
+
+                checked: true
+                text: "<font color=\"white\">ID</font>"
+
             }
-            NumberAnimation { id:animRect; target: menuview; property: "opacity"; from: 0; to:1; duration: 2000;
-            onStarted: { menuview.visible=true; console.log(menuview.visible)}
+            CheckBox {
+                id : name
+                indicator: Rectangle {
+                    implicitWidth: 24
+                    implicitHeight: 24
 
+                    x: name.leftPadding
+                    y: parent.height / 2 - height / 2
+                    radius: 5
+                    border.color: name.down ? "#2980b9" : "#2980b9"
 
-
-
-        }
-
-        }
-        Rectangle{
-            id: menu2
-            radius: 5
-            anchors.verticalCenter: parent.verticalCenter
-            width: 80
-            height: 35
-            color: "transparent"
-            Text {
-                anchors.centerIn: parent
-                text: qsTr("Behavior")
-            }
-            MouseArea{
-                anchors.fill: parent
-                onClicked: {
-                    animRect1.start()
-                    menuview.visible =false
+                    Text {
+                        width: 14
+                        height: 14
+                        x: 1
+                        y: -2
+                        text: "✔"
+                        font.pointSize: 18
+                        color: name.down ? "#2980b9" : "#2980b9"
+                        visible: name.checked
+                    }
                 }
+
+                checked: true
+                text: "<font color=\"white\">Name</font>"
             }
-                NumberAnimation { id:animRect1; target: menubeha; property: "opacity"; from: 0; to:1; duration: 2000;
-                onStarted: { menubeha.visible=true; console.log(menubeha.visible)}
+            CheckBox {
+                id : lastname
+                indicator: Rectangle {
+                    implicitWidth: 24
+                    implicitHeight: 24
+
+                    x: lastname.leftPadding
+                    y: parent.height / 2 - height / 2
+                    radius: 5
+                    border.color: lastname.down ? "#2980b9" : "#2980b9"
+
+                    Text {
+                        width: 14
+                        height: 14
+                        x: 1
+                        y: -2
+                        text: "✔"
+                        font.pointSize: 18
+                        color: lastname.down ? "#2980b9" : "#2980b9"
+                        visible: lastname.checked
+                    }
                 }
+
+                checked: true
+                text: "<font color=\"white\">LastName</font>"
+            }
+            CheckBox {
+                id : horzent
+                indicator: Rectangle {
+                    implicitWidth: 24
+                    implicitHeight: 24
+
+                    x: horzent.leftPadding
+                    y: parent.height / 2 - height / 2
+                    radius: 5
+                    border.color: horzent.down ? "#2980b9" : "#2980b9"
+
+                    Text {
+                        width: 14
+                        height: 14
+                        x: 1
+                        y: -2
+                        text: "✔"
+                        font.pointSize: 18
+                        color: horzent.down ? "#2980b9" : "#2980b9"
+                        visible: horzent.checked
+                    }
+                }
+
+                checked: false
+                text: "<font color=\"white\">Horizontal lines</font>"
+            }
+            CheckBox {
+                id : vertical
+                indicator: Rectangle {
+                    implicitWidth: 24
+                    implicitHeight: 24
+
+                    x: vertical.leftPadding
+                    y: parent.height / 2 - height / 2
+                    radius: 5
+                    border.color: vertical.down ? "#2980b9" : "#2980b9"
+
+                    Text {
+                        width: 14
+                        height: 14
+                        x: 1
+                        y: -2
+                        text: "✔"
+                        font.pointSize: 18
+                        color: vertical.down ? "#2980b9" : "#2980b9"
+                        visible: vertical.checked
+                    }
+                }
+
+                checked: false
+                text: "<font color=\"white\">Vertical lines</font>"
+            }
+
+
         }
 
     }
     Rectangle{
-        id: menubeha
-        visible: false
-        width: 200
-        height: 250
-        y:menu1.y + 40
-        x:menu2.x
-        border.width: 1
-        border.color: "gray"
-        color: "#ffefd3"
-        radius: 10
-        Column{
-            spacing: 2
-            anchors.fill: parent
-            Rectangle{
-                id:rec1
-                width:menuview.width
-                height: menuview.height/4
-                color:  "transparent"
-                radius: 10
-                Text {
-                    text: qsTr("Fit columns")
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-                MouseArea{
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onClicked: {
-                       if  (fitCheckbox=== false){
-                        fitCheckbox =true
-                           rec1.state="clicked"
-                        menubeha.visible=false
-                       }else{
-                           fitCheckbox =false
-                           menubeha.visible=false
-
-                       }
-                    }
-                    onEntered: {
-                        rec1.color="#adb6c4"
-                    }
-                    onExited: {
-                        rec1.color ="transparent"
-                    }
-                }
-
-
-            }
-            Rectangle{
-                id:rec2
-                width:menuview.width
-                height: menuview.height/4
-                color:  "transparent"
-                radius: 10
-                Text {
-                    text: qsTr("Hilight second col")
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-                MouseArea{
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onClicked: {
-
-                       if  (colorclom =='#00000000'){
-                        col2.color ='#8ecae6'
-
-                        menubeha.visible=false
-                       }else{
-                           col2.color ='transparent'
-                           menubeha.visible=false
-
-                       }
-                    }
-                    onEntered: {
-                        rec2.color="#adb6c4"
-                    }
-                    onExited: {
-                        rec2.color ="transparent"
-                    }
-                }
-
-
-            }
-            MenuSeparator {}
-            Rectangle{
-                id:rec3
-                width:menuview.width
-                height: menuview.height/4
-                color:  "transparent"
-                radius: 10
-                Text {
-                    text: qsTr("Show selected")
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-                MessageDialog {
-                    id: messageDialog
-                    title: "Show selected"
-                    text: dataGridView.currentValue.id + ',' + dataGridView.currentValue.name
-                    onAccepted: {
-                        Qt.quit()
-                    }
-
-                }
-                MouseArea{
-                    hoverEnabled: true
-                    anchors.fill: parent
-                    onClicked:{
-                        messageDialog.visible=true
-                        menubeha.visible=false
-
-                     }
-                     onEntered: {
-                         rec3.color="#adb6c4"
-                     }
-                     onExited: {
-                         rec3.color ="transparent"
-                     }
-
-                }
-
-            }
-            Rectangle{
-                id:rec4
-                width:menuview.width
-                height: menuview.height/4
-                color:  "transparent"
-                radius: 10
-                Text {
-                    text: qsTr("Show third column")
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-                MouseArea{
-                    hoverEnabled: true
-                    anchors.fill: parent
-                    onClicked: {
-                        if  (showThirdColumnMenu=== false){
-                         showThirdColumnMenu =true
-                         menubeha.visible=false
-                        }else{
-                            showThirdColumnMenu =false
-                            menubeha.visible=false
-
-                        }
-                     }
-                     onEntered: {
-                         rec4.color="#adb6c4"
-                     }
-                     onExited: {
-                         rec4.color ="transparent"
-                     }
-
-
-                }
-
-            }
+        id:recrefre
+        anchors.right: recadd.left
+        anchors.rightMargin: 10
+        width: 50
+        height: 30
+        radius: 15
+        anchors.verticalCenter: parent.verticalCenter
+        color: "transparent"
+        border.width: 1.2
+        border.color: "white";
+        Image {
+            id: refresh
+            width: 25
+            height: 25
+            anchors.centerIn:parent
+            source: "qrc:/icon/icons8-refresh-100.png"
         }
+
+        MouseArea{
+            anchors.fill: parent
+            hoverEnabled: true
+            onClicked: {
+                console.log("fdjgjfsdkg")
+
+            }
+            onEntered: {
+                refresh.source ="qrc:/icon/icons8-refresh-64.png"
+                recrefre.color ="#22FFFFFF"
+            }
+            onExited: {
+                refresh.source = "qrc:/icon/icons8-refresh-100.png"
+                recrefre.color ="transparent"
+
+            }
+
+        }
+
+
     }
-   Rectangle{
-       id: menuview
-       visible: false
-       width: 200
-       height: 200
-       y:menu1.y + 40
-       border.width: 1
-       border.color: "gray"
-       color: "#ffefd3"
-       radius: 10
-       Column{
-           spacing: 2
-           anchors.fill: parent
-           Rectangle{
-               id:rec12
-               width:menuview.width
-               height: menuview.height/3.5
-               color:  "transparent"
-               radius: 10
-               Text {
-                   text: qsTr("Horizontal lines")
-                   anchors.horizontalCenter: parent.horizontalCenter
-                   anchors.verticalCenter: parent.verticalCenter
-               }
-               MouseArea{
-                   anchors.fill: parent
-                   hoverEnabled: true
-                   onClicked: {
-                      if  (horizontalLinesCheckbox=== false){
-                       horizontalLinesCheckbox =true
-                          rec1.state="clicked"
-                       menuview.visible=false
-                      }else{
-                          horizontalLinesCheckbox =false
-                          menuview.visible=false
+    Rectangle{
+        id:recpdf
+        anchors.right: recrefre.left
+        anchors.rightMargin: 10
+        width: 50
+        height: 30
+        radius: 15
+        anchors.verticalCenter: parent.verticalCenter
+        color: "transparent"
+        border.width: 1.2
+        border.color: "white";
+        Image {
+            id: pdf
+            width: 25
+            height: 25
+            anchors.centerIn:parent
+            source: "qrc:/icon/icons8-pdf-100_1.png"
+        }
 
-                      }
-                   }
-                   onEntered: {
-                       rec12.color="#adb6c4"
-                   }
-                   onExited: {
-                       rec12.color ="transparent"
-                   }
-               }
+        MouseArea{
+            anchors.fill: parent
+            hoverEnabled: true
+            onClicked: {
+                console.log("fdjgjfsdkg")
+
+            }
+            onEntered: {
+                pdf.source ="qrc:/icon/icons8-pdf-80.png"
+                recpdf.color ="#22FFFFFF"
+            }
+            onExited: {
+                pdf.source = "qrc:/icon/icons8-pdf-100_1.png"
+                recpdf.color ="transparent"
+
+            }
+
+        }
 
 
-           }
-           Rectangle{
-               id:rec22
-               width:menuview.width
-               height: menuview.height/3.5
-               color:  "transparent"
-               radius: 10
-               Text {
-                   text: qsTr("Vertical lines")
-                   anchors.horizontalCenter: parent.horizontalCenter
-                   anchors.verticalCenter: parent.verticalCenter
-               }
-               MouseArea{
-                   hoverEnabled: true
-                   anchors.fill: parent
-                   onClicked:{
-                       if  (verticalLinesCheckbox=== false){
-                        verticalLinesCheckbox =true
-                        menuview.visible=false
-                       }else{
-                           verticalLinesCheckbox =false
-                           menuview.visible=false
-                       }
-                    }
-                    onEntered: {
-                        rec22.color="#adb6c4"
-                    }
-                    onExited: {
-                        rec22.color ="transparent"
-                    }
+    }
+    Rectangle{
+        id:recexe
+        anchors.right: recpdf.left
+        anchors.rightMargin: 10
+        width: 50
+        height: 30
+        radius: 15
+        anchors.verticalCenter: parent.verticalCenter
+        color: "transparent"
+        border.width: 1.2
+        border.color: "white";
+        Image {
+            id: exe
+            width: 25
+            height: 25
+            anchors.centerIn:parent
+            source: "qrc:/icon/icons8-exe-100.png"
+        }
 
-               }
+        MouseArea{
+            anchors.fill: parent
+            hoverEnabled: true
+            onClicked: {
+                console.log("fdjgjfsdkg")
 
-           }
-           Rectangle{
-               id:rec32
-               width:menuview.width
-               height: menuview.height/3.5
-               color:  "transparent"
-               radius: 10
-               Text {
-                   text: qsTr("Sepraete line")
-                   anchors.horizontalCenter: parent.horizontalCenter
-                   anchors.verticalCenter: parent.verticalCenter
-               }
-               MouseArea{
-                   hoverEnabled: true
-                   anchors.fill: parent
-                   onClicked: {
-                       if  (seprateHeaderLineCheckbox=== false){
-                        seprateHeaderLineCheckbox =true
-                        menuview.visible=false
-                       }else{
-                           seprateHeaderLineCheckbox =false
-                           menuview.visible=false
+            }
+            onEntered: {
+                exe.source ="qrc:/icon/icons8-exe-80.png"
+                recexe.color ="#22FFFFFF"
+            }
+            onExited: {
+                exe.source = "qrc:/icon/icons8-exe-100.png"
+                recexe.color ="transparent"
 
-                       }
-                    }
-                    onEntered: {
-                        rec32.color="#adb6c4"
-                    }
-                    onExited: {
-                        rec32.color ="transparent"
-                    }
+            }
+
+        }
 
 
-               }
+    }
+    SearchBar{
+        id:searc
+        anchors.right: recexe.left
+        anchors.rightMargin: 10
+        height: 30
+        width: 200
+        anchors.verticalCenter: parent.verticalCenter
+    }
 
-           }
-       }
-   }
+
+        Rectangle{
+            id:aleert
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+            width: 50
+            height: 30
+            radius: 15
+            anchors.verticalCenter: parent.verticalCenter
+            color: "transparent"
+            border.width: 1.2
+            border.color: "white";
+            Image {
+                id: row
+                width: 25
+                height: 25
+                anchors.centerIn:parent
+                source: "qrc:/icon/icons8-row-100.png"
+            }
+
+            MouseArea{
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: {
+                    messageDialog.open()
+
+                }
+                onEntered: {
+                    row.source ="qrc:/icon/icons8-row-96.png"
+                    aleert.color ="#22FFFFFF"
+                }
+                onExited: {
+                    row.source = "qrc:/icon/icons8-row-100.png"
+                    aleert.color ="transparent"
+
+                }
+
+            }
+            MessageDialog {
+                id: messageDialog
+                title: "Show selected"
+                text: dataGridView.currentValue.id + ',' + dataGridView.currentValue.name
+                onAccepted: {
+                    Qt.quit()
+                }
+        }
+
+
+
+    }
+
 }
 
 /*##^##
