@@ -7,10 +7,9 @@ ListView {
     id: root
 
     //apreance properties
-    property color borderColor: 'blue'
+    property color borderColor: Ui.getBordercolor()
     property color headerBackgroundColor: 'red'
-    property color backgroundColor1: "#2c3e50"
-    property color backgroundColor2: '#2980b9'
+
     property bool horizontalLines: true
     property bool verticalLines: true
     property bool headerSepratorLine: horizontalLines
@@ -26,7 +25,6 @@ ListView {
     property var currentValue: currentIndex === -1
                                ? null
                                : currentItem._model
-
     onColumnsChanged: {
         for (var i = 0; i < columns; i++)
             widthModel.append({size: -1})

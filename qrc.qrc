@@ -15,7 +15,6 @@
         <file>qml/main.qml</file>
         <file>qml/qtquickcontrols2.conf</file>
         <file>qml/Mymenu.qml</file>
-        <file>Btnwidget.qml</file>
         <file>icon/icons8-circled-menu-100.png</file>
         <file>icon/icons8-delete-100.png</file>
         <file>icon/icons8-edit-64.png</file>
@@ -43,5 +42,9 @@
         <file>icon/icons8-exe-100.png</file>
         <file>icon/icons8-back-to-100(1).png</file>
         <file>icon/icons8-next-page-100(2).png</file>
+        <file>Font/Times New Roman/times new roman bold italic.ttf</file>
+        <file>Font/Times New Roman/times new roman bold.ttf</file>
+        <file>Font/Times New Roman/times new roman italic.ttf</file>
+        <file>Font/Times New Roman/times new roman.ttf</file>
     </qresource>
 </RCC>

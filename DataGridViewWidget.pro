@@ -20,12 +20,14 @@ SOURCES += \
     form1.cpp \
     main.cpp \
     mainwindow.cpp \
-    samplemodel.cpp
+    samplemodel.cpp \
+    ui_gridview.cpp
 
 HEADERS += \
     form1.h \
     mainwindow.h \
-    samplemodel.h
+    samplemodel.h \
+    ui_gridview.h
 
 FORMS += \
     form1.ui \

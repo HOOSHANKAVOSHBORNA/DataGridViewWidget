@@ -1,10 +1,10 @@
 #include "samplemodel.h"
 
 #include <QRandomGenerator>
-
+#include <QDebug>
 SampleModel::SampleModel(QObject *parent) : QAbstractListModel(parent)
 {
-    fillSampleData();
+   fillSampleData();
 }
 
 SampleModel::~SampleModel()
@@ -52,6 +52,16 @@ QHash<int, QByteArray> SampleModel::roleNames() const
     };
 }
 
+void SampleModel::onClickedpdf()
+{
+    qDebug()<<"consol .log";
+}
+
+void SampleModel::onClickedexel()
+{
+    qDebug()<< "fddddddddddg";
+}
+
 void SampleModel::fillSampleData()
 {
     for (int i = 0; i < 100; ++i) {
@@ -61,6 +71,7 @@ void SampleModel::fillSampleData()
         _data.append(d);
     }
 }
+
 
 QString SampleModel::getSampleString() const
 {

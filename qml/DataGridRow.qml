@@ -9,9 +9,8 @@ ItemDelegate {
     property alias columns: repeater.model
     property DataGridHeader header: null
     property color borderColor: 'gray'
-    property bool horizontalLine: true
-    property bool verticalLine: true
-
+    property bool horizontalLine
+    property bool verticalLine
     contentItem: Item {
         anchors.fill: parent
         RowLayout {
@@ -51,8 +50,9 @@ ItemDelegate {
                         }
                         anchors.fill: parent
                         onLoaded: {
-                            if (modelData instanceof DataGridColumnCustom)
+                            if (modelData instanceof DataGridColumnCustom){
                                 item.text = model.getTextEvent(layout._d)
+                                console.log(item.text )}
                             else if (modelData instanceof DataGridColumnBinding || modelData instanceof DataGridColumn)
                                 item.text = layout._d[modelData.role]
                             else if (modelData instanceof DataGridColumnDelegate) {
@@ -69,10 +69,10 @@ ItemDelegate {
                             right: parent.right
                             bottom: parent.bottom
                             top: parent.top
-                            rightMargin: header === null ? 0 : -(header.spacing / 2)
+                            rightMargin:2
                         }
                         width: 1
-                        color: borderColor
+                        color: bprdercolor
                     }
                 }
             }
@@ -87,7 +87,7 @@ ItemDelegate {
 //                rightMargin: 2
             }
             height: 1
-            color: borderColor
+            color: bprdercolor
         }
     }
 }

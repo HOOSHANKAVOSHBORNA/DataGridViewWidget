@@ -8,7 +8,9 @@ Label {
     clip: true
     elide: "ElideRight"
     leftPadding: 4
-    color: "black"
+    font.family: focol.name
+    font.pixelSize: fontsize_col
+    color: fontcolor
     anchors.centerIn: parent
 
     background: Rectangle {

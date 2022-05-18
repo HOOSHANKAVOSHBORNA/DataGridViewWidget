@@ -7,14 +7,15 @@ Form1::Form1(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    view= new QQuickView(QUrl(QLatin1String("qrc:/Btnwidget.qml")));
-    qmlwidget=QWidget::createWindowContainer(view);
-    view->engine()->rootContext()->setContextProperty("form",this);
+    //view= new QQuickView(QUrl(QLatin1String("qrc:/Btnwidget.qml")));
+    //qmlwidget=QWidget::createWindowContainer(view);
+    //view->engine()->rootContext()->setContextProperty("form",this);
     /// horizontalLayout creat in ui
-    ui->horizontalLayout->addWidget(qmlwidget);
+    //ui->horizontalLayout->addWidget(qmlwidget);
 }
 
 Form1::~Form1()
 {
     delete ui;
 }
+

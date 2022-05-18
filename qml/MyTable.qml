@@ -6,11 +6,13 @@ import QtQuick.Layouts 1.12
 import Qt.labs.settings 1.1
 import QtQuick.Controls.Styles 1.4
 
-    Rectangle{
+ Rectangle{
         id: rectangle
         anchors.fill: parent
         //color: "#5c6b73"
         radius: 5
+
+
         MyFooter{
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 0
@@ -71,7 +73,7 @@ import QtQuick.Controls.Styles 1.4
             model: sampleModel
 
             borderColor: Material.dropShadowColor
-            headerBackgroundColor: '#2c3e50'
+            headerBackgroundColor: backgroundColor1
 
             fitColumns: menu.fitCheckbox
 
@@ -90,6 +92,7 @@ import QtQuick.Controls.Styles 1.4
 
 
             DataGridColumnBinding {
+                id:ied
                 role: "id"
                 title: "Id"
                 size: 100
@@ -99,7 +102,6 @@ import QtQuick.Controls.Styles 1.4
 
             }
             DataGridColumnBinding {
-                id: col2
                 role: "name"
                 title: "Name"
                 size: 100

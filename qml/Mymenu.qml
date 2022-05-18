@@ -15,8 +15,8 @@ Rectangle {
     property color colorclom
     radius: 5
     border.width: 1
-    border.color: "gray"
-    color: "#2c3e50"
+    border.color: bprdercolor
+    color: backgroundColor1
     id: menu
 
     Rectangle{
@@ -31,7 +31,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         color: "transparent"
         border.width: 1.2
-        border.color: "white";
+        border.color: bprdercolor
         Image {
             id: add
             width: 25
@@ -194,7 +194,7 @@ Rectangle {
                     }
                 }
 
-                checked: false
+                checked: true
                 text: "<font color=\"white\">Horizontal lines</font>"
             }
             CheckBox {
@@ -220,7 +220,7 @@ Rectangle {
                     }
                 }
 
-                checked: false
+                checked: true
                 text: "<font color=\"white\">Vertical lines</font>"
             }
 
@@ -238,7 +238,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         color: "transparent"
         border.width: 1.2
-        border.color: "white";
+        border.color: bprdercolor
         Image {
             id: refresh
             width: 25
@@ -251,7 +251,7 @@ Rectangle {
             anchors.fill: parent
             hoverEnabled: true
             onClicked: {
-                console.log("fdjgjfsdkg")
+                //_loader.reload()
 
             }
             onEntered: {
@@ -278,7 +278,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         color: "transparent"
         border.width: 1.2
-        border.color: "white";
+        border.color: bprdercolor
         Image {
             id: pdf
             width: 25
@@ -291,7 +291,7 @@ Rectangle {
             anchors.fill: parent
             hoverEnabled: true
             onClicked: {
-                console.log("fdjgjfsdkg")
+                sampleModel.onClickedpdf()
 
             }
             onEntered: {
@@ -318,7 +318,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         color: "transparent"
         border.width: 1.2
-        border.color: "white";
+        border.color: bprdercolor
         Image {
             id: exe
             width: 25
@@ -331,7 +331,7 @@ Rectangle {
             anchors.fill: parent
             hoverEnabled: true
             onClicked: {
-                console.log("fdjgjfsdkg")
+                sampleModel.onClickedexel()
 
             }
             onEntered: {
@@ -368,7 +368,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             color: "transparent"
             border.width: 1.2
-            border.color: "white";
+            border.color: bprdercolor
             Image {
                 id: row
                 width: 25

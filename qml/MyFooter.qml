@@ -1,9 +1,11 @@
 import QtQuick 2.0
+import Test 1.0
 import QtQuick.Controls 2.12
 Rectangle {
+
     width: parent.width -1
     height: 50
-    color: "#2980b9"
+    color: backgroundColor2
     radius: 5
     Rectangle{
         anchors.left: parent.left
@@ -15,22 +17,23 @@ Rectangle {
         //anchors.verticalCenter: parent.verticalCenter
         color: "transparent"
         border.width: 1.2
-        border.color: "white"
+        border.color: bprdercolor
         ComboBox{
             id: styleSelector
             anchors.fill: parent
-            onCurrentIndexChanged: {
 
+            onActivated: {
+                //console.log(sampleModel.setData(101,"dfsjkg","id"))
             }
-            model: [8,32 ,64,100]
+            model: [Math.round(sampleModel.rowCount()),Math.round(sampleModel.rowCount()/2),Math.round(sampleModel.rowCount()/4) ,Math.round(sampleModel.rowCount()/8)]
             delegate: ItemDelegate {
                 width: styleSelector.width *6
                 contentItem: Text {
                     text: modelData
-                    color: "#FFFFFF"
+                    color: fontcolor
 
-                    elide: Text.ElideRight
-                    verticalAlignment: Text.AlignVCenter
+                   // elide: Text.ElideRight
+                    //verticalAlignment: Text.AlignVCenter
                 }
                 background: Rectangle {
                     anchors.fill: parent
@@ -45,7 +48,7 @@ Rectangle {
             background: Rectangle {
                 anchors.fill: parent
                 color: "transparent"
-                border.color: styleSelector.pressed ? "#C0C0C0" : "#FFFFFF"
+                border.color: styleSelector.pressed ? "#C0C0C0" : bprdercolor
                 border.width: styleSelector.visualFocus ? 2 : 1
                 radius: 30
 
@@ -68,11 +71,12 @@ Rectangle {
                     anchors.fill: parent
                     color: "#88000000"
                     border.width: 1
-                    border.color:"#95A4A8"
+                    border.color:bprdercolor
                 }
                 contentItem: ListView {
 
                     id: listview
+
                     implicitHeight: popup.height
                     clip: true
                     model:styleSelector.delegateModel
@@ -126,9 +130,10 @@ Rectangle {
     }
     Label {
         id: lbl
-        color: "white"
+        color: fontcolor
         anchors.right: next.left
         anchors.rightMargin: 5
+        font.pixelSize: fontsize_col
         anchors.top: parent.top
         anchors.topMargin: 5
         text:  (view.currentIndex).toString() + "/" + (view.count - 1).toString()

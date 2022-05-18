@@ -9,7 +9,7 @@ Rectangle{
     id: recsearch
     color: "transparent"
     border.width: 1.2
-    border.color: "white"
+    border.color: bprdercolor
     radius: 10
 
     MouseArea{
@@ -17,21 +17,35 @@ Rectangle{
         hoverEnabled: true
         onEntered: {
             parent.color="#22FFFFFF"
+
         }
         onExited: {
             parent.color = "transparent"
+
         }
     }
 
     TextInput{
+        id : input
         text: "Search"
         padding: 8
-        color: "white"
+        color: fontcolor
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.leftMargin: 0
         anchors.right: parent.right
         anchors.rightMargin: 0
+
+
+
+
+        onAccepted: console.log(dataGridView.currentItem.name)
+
+
+
+        onActiveFocusChanged: {
+            text = ""
+        }
     }
 }
 

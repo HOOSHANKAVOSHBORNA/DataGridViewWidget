@@ -16,7 +16,9 @@ Item {
     Label {
         id: label
         text: modelData.title
-        color: 'white'
+        color: fontcolor
+        font.pixelSize: fontsizehedear
+        font.family: foheader.name
         font.bold: true
         anchors.fill: parent
         anchors.rightMargin: handler.width

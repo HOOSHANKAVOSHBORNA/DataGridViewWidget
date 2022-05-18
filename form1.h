@@ -22,6 +22,8 @@ public:
         this->close();
     }
 
+
+
 private:
     Ui::Form1 *ui;
     QQuickView *view;
