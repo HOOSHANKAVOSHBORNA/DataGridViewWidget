@@ -2,6 +2,7 @@
 
 #include <QRandomGenerator>
 #include <QDebug>
+#include <QModelIndex>
 SampleModel::SampleModel(QObject *parent) : QAbstractListModel(parent)
 {
    fillSampleData();
@@ -15,12 +16,21 @@ SampleModel::~SampleModel()
 int SampleModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
-    return 100;
+
+    return count;
+}
+
+int SampleModel::getCount(int t)
+{
+    count = t;
+    emit countChanged(count);
+    qDebug()<< count;
+
 }
 
 QVariant SampleModel::data(const QModelIndex &index, int role) const
 {
-    if (index.row() < 0 || index.row() > 100)
+    if (index.row() < 0 || index.row() > 200)
         return QVariant();
 
     auto row = _data.at(index.row());
@@ -42,6 +52,14 @@ QVariant SampleModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
+bool SampleModel::loadSampel()
+{
+    beginResetModel();
+    _data.clear();
+     fillSampleData();
+    endResetModel();
+}
+
 QHash<int, QByteArray> SampleModel::roleNames() const
 {
     return {
@@ -51,6 +69,7 @@ QHash<int, QByteArray> SampleModel::roleNames() const
         {GroupRole, "group"}
     };
 }
+
 
 void SampleModel::onClickedpdf()
 {
@@ -62,9 +81,11 @@ void SampleModel::onClickedexel()
     qDebug()<< "fddddddddddg";
 }
 
+
+
 void SampleModel::fillSampleData()
 {
-    for (int i = 0; i < 100; ++i) {
+    for (int i = 0; i < 200; ++i) {
         auto d = new DataEntry;
         d->name = getSampleString();
         d->lastName = getSampleString();

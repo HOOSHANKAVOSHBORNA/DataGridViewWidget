@@ -23,7 +23,9 @@ Rectangle {
             anchors.fill: parent
 
             onActivated: {
-                //console.log(sampleModel.setData(101,"dfsjkg","id"))
+                sampleModel.getCount(styleSelector.currentText)
+                sampleModel.loadSampel();
+                //console.log(dataGridView.get(12))
             }
             model: [Math.round(sampleModel.rowCount()),Math.round(sampleModel.rowCount()/2),Math.round(sampleModel.rowCount()/4) ,Math.round(sampleModel.rowCount()/8)]
             delegate: ItemDelegate {

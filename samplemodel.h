@@ -9,15 +9,20 @@ class SampleModel : public QAbstractListModel
 public:
     explicit SampleModel(QObject *parent = nullptr);
     ~SampleModel();
-
     int rowCount(const QModelIndex &parent) const override;
     QVariant data(const QModelIndex &index, int role) const override;
+     Q_INVOKABLE QString get_name(int index) const { return _data.at(index)->name; }
+    Q_INVOKABLE QString get_lastname(int index) const { return _data.at(index)->lastName; }
+     Q_INVOKABLE bool loadSampel();
     QHash<int, QByteArray> roleNames() const override;
 
+signals:
+    void countChanged(int c);
 
 public slots:
     void onClickedpdf();
     void onClickedexel();
+    int getCount (int count) ;
 
 
 private:
@@ -32,9 +37,9 @@ private:
         QString lastName;
     };
     QList<DataEntry*> _data;
-     QList<DataEntry*> _data1;
     void fillSampleData();
     QString getSampleString() const;
+    int count=100;
 
 };
 

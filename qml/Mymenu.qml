@@ -251,7 +251,7 @@ Rectangle {
             anchors.fill: parent
             hoverEnabled: true
             onClicked: {
-                //_loader.reload()
+                sampleModel.loadSampel();
 
             }
             onEntered: {

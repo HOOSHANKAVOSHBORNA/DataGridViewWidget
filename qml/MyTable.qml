@@ -12,7 +12,12 @@ import QtQuick.Controls.Styles 1.4
         //color: "#5c6b73"
         radius: 5
 
+        Flow {
+               id: layout
+               anchors.fill: parent
 
+               Loader { id: loader }
+           }
         MyFooter{
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 0

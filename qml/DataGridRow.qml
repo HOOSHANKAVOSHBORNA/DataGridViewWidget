@@ -42,6 +42,7 @@ ItemDelegate {
 //                               ((index == repeater.count - 1 || index == 0) ? header.spacing / 2 : header.spacing)
                     }
                     Loader {
+                        id:load
                         source: {
                             if (modelData instanceof DataGridColumn || modelData instanceof DataGridColumnBinding || modelData instanceof DataGridColumnCustom)
                                 return "DataGridLabel.qml"

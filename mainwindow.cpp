@@ -28,10 +28,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->horizontalLayout->addWidget(qmlwidget);
 
 
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+
 
