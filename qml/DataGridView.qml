@@ -41,8 +41,8 @@ ListView {
                GradientStop { position: 0.0; color: backgroundColor1}
                GradientStop { position: 1.0; color: backgroundColor2 }
            }
-        border.color: borderColor
-        border.width: 1
+        //border.color: borderColor
+        //border.width: 1
         radius: 5
         z: -1
     }

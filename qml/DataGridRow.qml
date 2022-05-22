@@ -70,10 +70,10 @@ ItemDelegate {
                             right: parent.right
                             bottom: parent.bottom
                             top: parent.top
-                            rightMargin:2
+                            rightMargin:-1
                         }
                         width: 1
-                        color: bprdercolor
+                        color: bordercolor
                     }
                 }
             }
@@ -85,10 +85,10 @@ ItemDelegate {
                 left: layout.left
                 bottom: parent.bottom
                 right: layout.right
-//                rightMargin: 2
+               rightMargin: 0
             }
             height: 1
-            color: bprdercolor
+            color: bordercolor
         }
     }
 }

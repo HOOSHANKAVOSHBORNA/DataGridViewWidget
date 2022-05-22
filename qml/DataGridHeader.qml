@@ -35,6 +35,7 @@ Rectangle {
                 top: parent.top
                 left: parent.left
                 bottom: parent.bottom
+                leftMargin: 3
             }
             visible: !fitColumn
             spacing: 4

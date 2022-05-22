@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     //Ui->setBordercolor("yellow");
     //Ui->setFontcolor("yellow");
     //Ui->setFontszie_col(12);
-    //Ui->setFontsizeHedear(14);
+    Ui->setFontsizeHedear(16);
     view->engine()->rootContext()->setContextProperty("Ui",Ui);
     ///set qml to widget
     qmlwidget=QWidget::createWindowContainer(view);

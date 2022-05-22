@@ -3,7 +3,7 @@ import QtQuick.Controls 2.12
 Item {
     property color backgroundColor1: Ui.getGradiantColor1()//"#2c3e50"
     property color backgroundColor2: Ui.getGradiantColor2()//'#2980b9'
-    property color bprdercolor: Ui.getBordercolor()//'#2980b9'
+    property color bordercolor: Ui.getBordercolor()//'#2980b9'
     property color fontcolor: Ui.getFontcolor()//'#2980b9'
     property  int fontsize_col: Ui.getFontsize_col()
     property  int fontsizehedear: Ui.getFontsizeHeader()

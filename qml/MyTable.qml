@@ -9,15 +9,10 @@ import QtQuick.Controls.Styles 1.4
  Rectangle{
         id: rectangle
         anchors.fill: parent
-        //color: "#5c6b73"
-        radius: 5
+        color: backgroundColor1
+        radius: 10
 
-        Flow {
-               id: layout
-               anchors.fill: parent
 
-               Loader { id: loader }
-           }
         MyFooter{
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 0
@@ -181,12 +176,13 @@ import QtQuick.Controls.Styles 1.4
             id:menu
             width: parent.width
             height: 40
+            anchors.topMargin: 10
             anchors.top: parent.top
 
         }
         MyFooter{
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: -16
+            anchors.bottomMargin: 3
         }
 
 

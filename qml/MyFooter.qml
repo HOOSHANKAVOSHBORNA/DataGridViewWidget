@@ -2,25 +2,29 @@ import QtQuick 2.0
 import Test 1.0
 import QtQuick.Controls 2.12
 Rectangle {
+    id: rectangle1
 
     width: parent.width -1
     height: 50
     color: backgroundColor2
     radius: 5
     Rectangle{
+        id: rectangle
         anchors.left: parent.left
         anchors.leftMargin: 10
-        anchors.top: parent.top
         width: 80
         height: 30
         radius: 15
+        anchors.verticalCenter: parent.verticalCenter
         //anchors.verticalCenter: parent.verticalCenter
         color: "transparent"
         border.width: 1.2
-        border.color: bprdercolor
+        border.color: bordercolor
         ComboBox{
             id: styleSelector
-            anchors.fill: parent
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.right: parent.right
+            anchors.left: parent.left
 
             onActivated: {
                 sampleModel.getCount(styleSelector.currentText)
@@ -39,7 +43,7 @@ Rectangle {
                 }
                 background: Rectangle {
                     anchors.fill: parent
-                    id:item
+                    id:i
                     width: 50
                     color: "transparent"
                     radius: 20
@@ -50,7 +54,7 @@ Rectangle {
             background: Rectangle {
                 anchors.fill: parent
                 color: "transparent"
-                border.color: styleSelector.pressed ? "#C0C0C0" : bprdercolor
+                border.color: styleSelector.pressed ? "#C0C0C0" : bordercolor
                 border.width: styleSelector.visualFocus ? 2 : 1
                 radius: 30
 
@@ -73,7 +77,7 @@ Rectangle {
                     anchors.fill: parent
                     color: "#88000000"
                     border.width: 1
-                    border.color:bprdercolor
+                    border.color:bordercolor
                 }
                 contentItem: ListView {
 
@@ -117,6 +121,7 @@ Rectangle {
         anchors.right: parent.right
         width: 32
         height: 32
+        anchors.verticalCenter: parent.verticalCenter
 
         anchors.rightMargin: 10
         source: "qrc:/icon/icons8-next-page-100(2).png"
@@ -136,15 +141,15 @@ Rectangle {
         anchors.right: next.left
         anchors.rightMargin: 5
         font.pixelSize: fontsize_col
-        anchors.top: parent.top
-        anchors.topMargin: 5
         text:  (view.currentIndex).toString() + "/" + (view.count - 1).toString()
+        anchors.verticalCenter: parent.verticalCenter
     }
     Image {
         id: prev
         anchors.right: lbl.left
         width: 32
         height: 32
+        anchors.verticalCenter: parent.verticalCenter
 
         anchors.rightMargin: 10
         source: "qrc:/icon/icons8-back-to-100(1).png"

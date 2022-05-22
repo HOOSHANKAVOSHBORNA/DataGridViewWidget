@@ -14,8 +14,8 @@ Rectangle {
     property bool  fitCheckbox: true
     property color colorclom
     radius: 5
-    border.width: 1
-    border.color: bprdercolor
+    //border.width: 1
+    //border.color: bprdercolor
     color: backgroundColor1
     id: menu
 
@@ -31,7 +31,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         color: "transparent"
         border.width: 1.2
-        border.color: bprdercolor
+        border.color: bordercolor
         Image {
             id: add
             width: 25
@@ -238,7 +238,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         color: "transparent"
         border.width: 1.2
-        border.color: bprdercolor
+        border.color: bordercolor
         Image {
             id: refresh
             width: 25
@@ -278,7 +278,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         color: "transparent"
         border.width: 1.2
-        border.color: bprdercolor
+        border.color: bordercolor
         Image {
             id: pdf
             width: 25
@@ -318,7 +318,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         color: "transparent"
         border.width: 1.2
-        border.color: bprdercolor
+        border.color: bordercolor
         Image {
             id: exe
             width: 25
@@ -368,7 +368,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             color: "transparent"
             border.width: 1.2
-            border.color: bprdercolor
+            border.color: bordercolor
             Image {
                 id: row
                 width: 25

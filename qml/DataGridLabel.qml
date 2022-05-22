@@ -13,6 +13,7 @@ Label {
     color: fontcolor
     anchors.centerIn: parent
 
+
     background: Rectangle {
         color: modelData.color
     }

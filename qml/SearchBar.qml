@@ -10,7 +10,7 @@ Rectangle{
     id: recsearch
     color: "transparent"
     border.width: 1.2
-    border.color: bprdercolor
+    border.color: bordercolor
     radius: 10
 
     MouseArea{
