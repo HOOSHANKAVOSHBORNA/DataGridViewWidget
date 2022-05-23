@@ -1,19 +1,18 @@
 #ifndef SAMPLEMODEL_H
 #define SAMPLEMODEL_H
 
-#include <QAbstractListModel>
+#include <QStandardItemModel>
 
-class SampleModel : public QAbstractListModel
+class SampleModel : public QStandardItemModel
 {
     Q_OBJECT
 public:
     explicit SampleModel(QObject *parent = nullptr);
     ~SampleModel();
     int rowCount(const QModelIndex &parent) const override;
-    QVariant data(const QModelIndex &index, int role) const override;
-     Q_INVOKABLE QString get_name(int index) const { return _data.at(index)->name; }
-    Q_INVOKABLE QString get_lastname(int index) const { return _data.at(index)->lastName; }
-     Q_INVOKABLE bool loadSampel();
+     Q_INVOKABLE QString get_name(int i) const ;
+    Q_INVOKABLE QString get_lastname(int i) const ;
+    Q_INVOKABLE bool loadSampel();
     QHash<int, QByteArray> roleNames() const override;
 
 signals:
@@ -23,20 +22,16 @@ public slots:
     void onClickedpdf();
     void onClickedexel();
     int getCount (int count) ;
+    void onClickedcurrentindex(int  index);
 
 
 private:
     enum Roles {
         IdRole = Qt::UserRole + 1,
         NameRole,
-        LastNameRole,
-        GroupRole
+        LastNameRole
     };
-    struct DataEntry {
-        QString name;
-        QString lastName;
-    };
-    QList<DataEntry*> _data;
+    QStandardItem *row;
     void fillSampleData();
     QString getSampleString() const;
     int count=100;

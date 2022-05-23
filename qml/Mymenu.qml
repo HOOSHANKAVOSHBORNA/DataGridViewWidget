@@ -292,6 +292,7 @@ Rectangle {
             hoverEnabled: true
             onClicked: {
                 sampleModel.onClickedpdf()
+                messagepdf.open()
 
             }
             onEntered: {
@@ -331,7 +332,8 @@ Rectangle {
             anchors.fill: parent
             hoverEnabled: true
             onClicked: {
-                sampleModel.onClickedexel()
+             sampleModel.onClickedexel()
+
 
             }
             onEntered: {
@@ -399,6 +401,15 @@ Rectangle {
                 id: messageDialog
                 title: "Show selected"
                 text: dataGridView.currentValue.id + ',' + dataGridView.currentValue.name
+                onAccepted: {
+                    Qt.quit()
+                }
+        }
+            MessageDialog {
+
+                id: messagepdf
+                title: "Information"
+                text: "creat pdf"
                 onAccepted: {
                     Qt.quit()
                 }

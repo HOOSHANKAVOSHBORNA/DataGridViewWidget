@@ -41,8 +41,7 @@ Rectangle{
         }
 
         onAccepted:{
-
-            for(var i = 0 ;i<sampleModel.rowCount();i++){
+                        for(var i = 0 ;i<sampleModel.rowCount();i++){
                 if (sampleModel.get_name(i)===input.text || sampleModel.get_lastname(i)===input.text){
                     accept.open();
                     break

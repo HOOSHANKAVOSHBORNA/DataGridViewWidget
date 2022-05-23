@@ -87,7 +87,7 @@ import QtQuick.Controls.Styles 1.4
             highlightFollowsCurrentItem: false
 
             onRowClicked: {
-                console.log('row clicked', model.id)
+                sampleModel.onClickedcurrentindex(currentIndex)
             }
 
 
