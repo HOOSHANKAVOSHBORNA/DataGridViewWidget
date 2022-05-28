@@ -8,10 +8,14 @@
 #include <QTextCursor>
 #include <QTextTableCell>
 #include <QPrinter>
+#include <QDebug>
+#include <QModelIndex>
+#include <QFileDialog>
 SampleModel::SampleModel(QObject *parent) : QStandardItemModel(parent)
 {
-   clear();
-   fillSampleData();
+
+    this->clear();
+    fillSampleData();
 }
 
 SampleModel::~SampleModel()
@@ -28,9 +32,9 @@ int SampleModel::rowCount(const QModelIndex &parent) const
 
 QString SampleModel::get_name(int i) const
 {
-     QModelIndex it =index(i,0);
-     QString b = data(it, NameRole).toString();
-     return  b;
+    QModelIndex it =index(i,0);
+    QString b =data(it, NameRole).toString();
+    return  b;
 
 
 }
@@ -42,12 +46,24 @@ QString SampleModel::get_lastname(int i) const
     return  b;
 }
 
-int SampleModel::getCount(int t)
+QString SampleModel::get_ID(int i) const
+{
+    QModelIndex it =index(i,0);
+    QString b = data(it, IdRole).toString();
+    return  b;
+}
+
+void SampleModel::getCount(int t)
 {
     count = t;
     emit countChanged(count);
     qDebug()<< count;
 
+}
+
+void SampleModel::getNameSearch(QString name)
+{
+    namesearch = name;
 }
 
 void SampleModel::onClickedcurrentindex(int index)
@@ -58,10 +74,11 @@ void SampleModel::onClickedcurrentindex(int index)
 
 
 
-bool SampleModel::loadSampel()
+void SampleModel::loadSampel()
 {
     this->beginResetModel();
     this->clear();
+    count =100;
     this->fillSampleData();
     this->endResetModel();
 
@@ -76,6 +93,7 @@ QHash<int, QByteArray> SampleModel::roleNames() const
 
     };
 }
+
 
 
 void SampleModel::onClickedpdf()
@@ -117,16 +135,36 @@ void SampleModel::onClickedpdf()
     cursor.insertBlock();
 
     //Print to PDF
+    QString fname = QFileDialog::getSaveFileName(nullptr, "Save name", ".", "Pdf File (*.pdf)" );
     QPrinter printer(QPrinter::HighResolution) ;
     printer.setOutputFormat(QPrinter::PdfFormat);
-    printer.setOutputFileName("/home/client112/test.pdf");
+    printer.setOutputFileName(fname);
     doc->print(&printer);
 
 }
 
 void SampleModel::onClickedexel()
 {
-    qDebug()<< "fddddddddddg";
+    QString textdata;
+
+    for (int i=0;i<count;++i) {
+
+        textdata+=data(index(i,0),IdRole).toString();
+        textdata+=" ,";
+        textdata+=data(index(i,0),NameRole).toString();
+        textdata+=" ,";
+        textdata+=data(index(i,0),LastNameRole).toString();
+        textdata+=" ,";
+        textdata+ "\n";
+    }
+    QString fname = QFileDialog::getSaveFileName(nullptr, "Save name", ".", "Csv File (*.csv)" );
+    QFile csvFile(fname);
+    if(csvFile.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+
+        QTextStream out(&csvFile);
+        out << textdata;
+    }
+    csvFile.close();
 }
 
 
@@ -136,14 +174,14 @@ void SampleModel::fillSampleData()
     for (int i = 1; i <= 100; ++i) {
         row = new QStandardItem;
         row->setData(i,IdRole);
-          row->setData(getSampleString(),NameRole);
-          row->setData(getSampleString(),LastNameRole);
-          this->appendRow(row);
-          //_data.append(row);
-//        auto d = new DataEntry;
-//        d->name = getSampleString();
-//        d->lastName = getSampleString();
-//        _data.append(d);
+        row->setData(getSampleString(),NameRole);
+        row->setData(getSampleString(),LastNameRole);
+        this->appendRow(row);
+        //_data.append(row);
+        //        auto d = new DataEntry;
+        //        d->name = getSampleString();
+        //        d->lastName = getSampleString();
+        //        _data.append(d);
     }
 }
 
@@ -157,4 +195,55 @@ QString SampleModel::getSampleString() const
         ret.append(chars.midRef(QRandomGenerator::global()->bounded(0, chars.size() - 1), 1));
     }
     return ret;
+}
+
+void SampleModel::searchFilter(QString string)
+{
+    dataID.clear();
+    dataName.clear();
+    dataLastname.clear();
+    if(string.isEmpty()){
+        return;}
+    if (namesearch=="ID"){
+        //qDebug()<<"ID";
+        for (int i=0;i<count;++i) {
+            if (get_ID(i).contains(string)){
+                dataID.append(get_ID(i));
+                dataName.append(get_name(i));
+                dataLastname.append(get_lastname(i));
+
+            }
+        }
+    }
+    else if (namesearch=="Name") {
+        for (int i=0;i<count;++i) {
+            if (get_name(i).contains(string)){
+                dataID.append(get_ID(i));
+                dataName.append(get_name(i));
+                dataLastname.append(get_lastname(i));
+            }
+        }
+    }
+    else {
+        for (int i=0;i<count;++i) {
+            if (get_lastname(i).contains(string)){
+                dataID.append(get_ID(i));
+                dataName.append(get_name(i));
+                dataLastname.append(get_lastname(i));
+            }
+        }
+    }
+    this->beginResetModel();
+    this->clear();
+    count =dataID.size();
+    for (int i =0;i<count;++i) {
+        row = new QStandardItem;
+        row->setData(dataID[i],IdRole);
+        row->setData(dataName[i],NameRole);
+        row->setData(dataLastname[i],LastNameRole);
+        this->appendRow(row);
+    }
+    //this->fillSampleData();
+    this->endResetModel();
+
 }

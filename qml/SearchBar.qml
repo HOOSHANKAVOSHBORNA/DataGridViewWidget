@@ -1,3 +1,4 @@
+/// SearchBar in qml for gridview
 import QtQuick 2.12
 import QtQuick.Controls.Material 2.12
 import QtQuick.Controls 2.12
@@ -37,25 +38,18 @@ Rectangle{
         anchors.right: parent.right
         anchors.rightMargin: 0
         onTextChanged: {
-
+            sampleModel.searchFilter(input.text)
         }
 
-        onAccepted:{
-                        for(var i = 0 ;i<sampleModel.rowCount();i++){
-                if (sampleModel.get_name(i)===input.text || sampleModel.get_lastname(i)===input.text){
-                    accept.open();
-                    break
-                }
-                else
-                    rejected.open()
-            }
+        onAccepted: {
+            text ="Search"
         }
-
 
 
         onActiveFocusChanged: {
             text = ""
         }
+
     }
     MessageDialog {
         id: accept
