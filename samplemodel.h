@@ -14,6 +14,7 @@ public:
     Q_INVOKABLE QString get_lastname(int i) const ;
      Q_INVOKABLE QString get_ID(int i) const ;
     Q_INVOKABLE void loadSampel();
+    Q_INVOKABLE void loadcountsampel();
     QHash<int, QByteArray> roleNames() const override;
     void Search (QString name);
 signals:

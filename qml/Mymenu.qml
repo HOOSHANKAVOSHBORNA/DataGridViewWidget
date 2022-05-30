@@ -352,164 +352,121 @@ Rectangle {
     }
     SearchBar{
         id:searc
+        anchors.left: parent.left
+        anchors.leftMargin: 10
         anchors.right: recexe.left
-        anchors.rightMargin: 10
+        anchors.rightMargin:10
         height: 30
         width: 200
         anchors.verticalCenter: parent.verticalCenter
     }
-    Rectangle{
-        id: rectangle
-        anchors.right:  searc.left
-        anchors.rightMargin: 10
-        width: 150
-        height: 30
-        radius: 15
-        anchors.verticalCenter: parent.verticalCenter
-        //anchors.verticalCenter: parent.verticalCenter
-        color: "transparent"
-        border.width: 1.2
-        border.color: bordercolor
-        ComboBox{
-            id: combosearch
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.right: parent.right
-            anchors.left: parent.left
+//    Rectangle{
+//        id: rectangle
+//        anchors.right:  searc.left
+//        anchors.rightMargin: 10
+//        width: 150
+//        height: 30
+//        radius: 15
+//        anchors.verticalCenter: parent.verticalCenter
+//        //anchors.verticalCenter: parent.verticalCenter
+//        color: "transparent"
+//        border.width: 1.2
+//        border.color: bordercolor
+//        ComboBox{
+//            id: combosearch
+//            anchors.verticalCenter: parent.verticalCenter
+//            anchors.right: parent.right
+//            anchors.left: parent.left
 
-            onActivated: {
-                    sampleModel.getNameSearch(currentText)
-            }
+//            onActivated: {
+//                    sampleModel.getNameSearch(currentText)
+//            }
 
-            model:["ID","Name","Lastname"]
-            delegate: ItemDelegate {
-                width: combosearch.width *6
-                contentItem: Text {
-                    text: modelData
-                    color: fontcolor
+//            model:["ID","Name","Lastname"]
+//            delegate: ItemDelegate {
+//                width: combosearch.width *6
+//                contentItem: Text {
+//                    text: modelData
+//                    color: fontcolor
 
-                   // elide: Text.ElideRight
-                    //verticalAlignment: Text.AlignVCenter
-                }
-                background: Rectangle {
-                    anchors.fill: parent
-                    id:i
-                    width: 50
-                    color: "transparent"
-                    radius: 20
-
-
-                }
-            }
-            background: Rectangle {
-                anchors.fill: parent
-                color: "transparent"
-                border.color: combosearch.pressed ? "#C0C0C0" : bordercolor
-                border.width: combosearch.visualFocus ? 2 : 1
-                radius: 30
-
-            }
-
-            popup: Popup{
-                id:popup
-                y: combosearch.height - 1
-                width: combosearch.width
-                height: combosearch.height * 6
-                padding: 1
-                enter: Transition {
-                          NumberAnimation { property: "height"; duration: 1000;from: 0.0; to: combosearch.height * 6 }
-                      }
-                exit: Transition {
-                          NumberAnimation { property: "height";duration: 1000 ;from: combosearch.height * 6 ; to: 0.0 }
-                      }
-                background: Rectangle {
-                    radius: 5
-                    anchors.fill: parent
-                    color: "#88000000"
-                    border.width: 1
-                    border.color:bordercolor
-                }
-                contentItem: ListView {
-
-                    id: listview
-
-                    implicitHeight: popup.height
-                    clip: true
-                    model:combosearch.delegateModel
-                    currentIndex: combosearch.highlightedIndex
-                    interactive: true
-                    highlightMoveDuration: 5
-                    boundsBehavior: ListView.StopAtBounds
-                    highlight: highlight
+//                   // elide: Text.ElideRight
+//                    //verticalAlignment: Text.AlignVCenter
+//                }
+//                background: Rectangle {
+//                    anchors.fill: parent
+//                    id:i
+//                    width: 50
+//                    color: "transparent"
+//                    radius: 20
 
 
-                    ScrollBar.vertical:ScrollBar {}
-                }
+//                }
+//            }
+//            background: Rectangle {
+//                anchors.fill: parent
+//                color: "transparent"
+//                border.color: combosearch.pressed ? "#C0C0C0" : bordercolor
+//                border.width: combosearch.visualFocus ? 2 : 1
+//                radius: 30
 
-            }
+//            }
 
-            Component {
-                  id: highlight
-                  Rectangle {
-                      width: 10; height: 20
+//            popup: Popup{
+//                id:popup
+//                y: combosearch.height - 1
+//                width: combosearch.width
+//                height: combosearch.height * 6
+//                padding: 1
+//                enter: Transition {
+//                          NumberAnimation { property: "height"; duration: 1000;from: 0.0; to: combosearch.height * 6 }
+//                      }
+//                exit: Transition {
+//                          NumberAnimation { property: "height";duration: 1000 ;from: combosearch.height * 6 ; to: 0.0 }
+//                      }
+//                background: Rectangle {
+//                    radius: 5
+//                    anchors.fill: parent
+//                    color: "#88000000"
+//                    border.width: 1
+//                    border.color:bordercolor
+//                }
+//                contentItem: ListView {
 
-                      color: "#11FFFFFF"; radius: 0
-                      //y: listview.currentItem.y
-                      Behavior on y {
-                          SpringAnimation {
-                              spring: 3
-                              damping: 0.2
-                          }
-                      }
-                  }
-              }
-        }
-    }
+//                    id: listview
 
-        Rectangle{
-            id:aleert
-            anchors.left: parent.left
-            anchors.leftMargin: 10
-            width: 50
-            height: 30
-            radius: 15
-            anchors.verticalCenter: parent.verticalCenter
-            color: "transparent"
-            border.width: 1.2
-            border.color: bordercolor
-            Image {
-                id: row
-                width: 25
-                height: 25
-                anchors.centerIn:parent
-                source: "qrc:/icon/icons8-row-100.png"
-            }
+//                    implicitHeight: popup.height
+//                    clip: true
+//                    model:combosearch.delegateModel
+//                    currentIndex: combosearch.highlightedIndex
+//                    interactive: true
+//                    highlightMoveDuration: 5
+//                    boundsBehavior: ListView.StopAtBounds
+//                    highlight: highlight
 
-            MouseArea{
-                anchors.fill: parent
-                hoverEnabled: true
-                onClicked: {
-                    messageDialog.open()
 
-                }
-                onEntered: {
-                    row.source ="qrc:/icon/icons8-row-96.png"
-                    aleert.color ="#22FFFFFF"
-                }
-                onExited: {
-                    row.source = "qrc:/icon/icons8-row-100.png"
-                    aleert.color ="transparent"
+//                    ScrollBar.vertical:ScrollBar {}
+//                }
 
-                }
+//            }
 
-            }
-            MessageDialog {
-                id: messageDialog
-                title: "Show selected"
-                text: dataGridView.currentValue.id + ',' + dataGridView.currentValue.name
-                onAccepted: {
-                    Qt.quit()
-                }
-        }
+//            Component {
+//                  id: highlight
+//                  Rectangle {
+//                      width: 10; height: 20
+
+//                      color: "#11FFFFFF"; radius: 0
+//                      //y: listview.currentItem.y
+//                      Behavior on y {
+//                          SpringAnimation {
+//                              spring: 3
+//                              damping: 0.2
+//                          }
+//                      }
+//                  }
+//              }
+//        }
+//    }
+
             MessageDialog {
 
                 id: messagepdf
@@ -531,7 +488,7 @@ Rectangle {
 
 
 
-    }
+
 
 }
 

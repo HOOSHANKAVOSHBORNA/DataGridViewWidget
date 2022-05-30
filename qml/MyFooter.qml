@@ -4,10 +4,10 @@ import QtQuick.Controls 2.12
 Rectangle {
     id: rectangle1
 
-    width: parent.width -1
+    width: parent.width
     height: 50
     color: backgroundColor2
-    radius: 5
+    //radius: 5
     Rectangle{
         id: rectangle
         anchors.left: parent.left
@@ -28,7 +28,7 @@ Rectangle {
 
             onActivated: {
                 sampleModel.getCount(styleSelector.currentText)
-                sampleModel.loadSampel();
+                sampleModel.loadcountsampel();
                 //console.log(dataGridView.get(12))
             }
             model: [Math.round(sampleModel.rowCount()),Math.round(sampleModel.rowCount()/2),Math.round(sampleModel.rowCount()/4) ,Math.round(sampleModel.rowCount()/8)]

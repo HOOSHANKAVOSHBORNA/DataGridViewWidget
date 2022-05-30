@@ -43,7 +43,7 @@ ListView {
            }
         //border.color: borderColor
         //border.width: 1
-        radius: 5
+        //radius: 5
         z: -1
     }
 

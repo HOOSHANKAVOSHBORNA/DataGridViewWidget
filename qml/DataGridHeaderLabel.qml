@@ -35,7 +35,7 @@ Item {
 
     DataGridHeaderResizeHandler {
         id: handler
-        color: bordercolor
+        color: "transparent"
 
         width: 4
         height: parent.height

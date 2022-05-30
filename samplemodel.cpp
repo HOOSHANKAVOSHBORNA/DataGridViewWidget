@@ -84,6 +84,14 @@ void SampleModel::loadSampel()
 
 }
 
+void SampleModel::loadcountsampel()
+{
+    this->beginResetModel();
+    this->clear();
+    this->fillSampleData();
+    this->endResetModel();
+}
+
 QHash<int, QByteArray> SampleModel::roleNames() const
 {
     return {
@@ -203,6 +211,7 @@ void SampleModel::searchFilter(QString string)
     dataName.clear();
     dataLastname.clear();
     if(string.isEmpty()){
+        loadSampel();
         return;}
     if (namesearch=="ID"){
         //qDebug()<<"ID";

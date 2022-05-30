@@ -13,10 +13,7 @@ Rectangle{
     radius: 10
 
 
-    MyFooter{
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-    }
+
 
     SampleModel {
         id: sampleModel
@@ -64,7 +61,7 @@ Rectangle{
     DataGridView {
         id: dataGridView
         width: parent.width
-        height: parent.height -70
+        height: parent.height -100
         anchors.topMargin: 2
         //anchors.fill: parent
         anchors.top: menu.bottom
@@ -121,56 +118,56 @@ Rectangle{
         //                }
         //            }
 
-        DataGridColumnDelegate {
-            title: "Actiron"
-            size: 100
-            delegate:Rectangle{
-                anchors.fill: parent
-                color: "transparent"
-                Image {
-                    anchors.centerIn: parent
-                    width: 20
-                    height: 20
-                    id: update
-                    source: "qrc:/icon/icons8-edit-64.png"
-                    MouseArea{
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        onClicked: {
-                            console.log("Edit")
-                        }
-                        onEntered: {
-                            update.source = "qrc:/icon/icons8-edit.png"
-                        }
-                        onExited: {
-                            update.source = "qrc:/icon/icons8-edit-64.png"
-                        }
-                    }
-                }
-                Image {
-                    anchors.left:update.right
-                    y :5
-                    width: 25
-                    height: 25
-                    //anchors.horizontalCenter: parent.horizontalCenter
-                    id: del
-                    source: "qrc:/icon/icons8-delete-100.png"
-                    MouseArea{
-                        hoverEnabled: true
-                        anchors.fill: parent
-                        onClicked: {
-                            console.log("dlete")
-                        }
-                        onEntered: {
-                            del.source = "qrc:/icon/icons8-delete.png"
-                        }
-                        onExited: {
-                            del.source = "qrc:/icon/icons8-delete-100.png"
-                        }
-                    }
-                }
-            }
-        }
+//        DataGridColumnDelegate {
+//            title: "Actiron"
+//            size: 100
+//            delegate:Rectangle{
+//                anchors.fill: parent
+//                color: "transparent"
+//                Image {
+//                    anchors.centerIn: parent
+//                    width: 20
+//                    height: 20
+//                    id: update
+//                    source: "qrc:/icon/icons8-edit-64.png"
+//                    MouseArea{
+//                        anchors.fill: parent
+//                        hoverEnabled: true
+//                        onClicked: {
+//                            console.log("Edit")
+//                        }
+//                        onEntered: {
+//                            update.source = "qrc:/icon/icons8-edit.png"
+//                        }
+//                        onExited: {
+//                            update.source = "qrc:/icon/icons8-edit-64.png"
+//                        }
+//                    }
+//                }
+//                Image {
+//                    anchors.left:update.right
+//                    y :5
+//                    width: 25
+//                    height: 25
+//                    //anchors.horizontalCenter: parent.horizontalCenter
+//                    id: del
+//                    source: "qrc:/icon/icons8-delete-100.png"
+//                    MouseArea{
+//                        hoverEnabled: true
+//                        anchors.fill: parent
+//                        onClicked: {
+//                            console.log("dlete")
+//                        }
+//                        onEntered: {
+//                            del.source = "qrc:/icon/icons8-delete.png"
+//                        }
+//                        onExited: {
+//                            del.source = "qrc:/icon/icons8-delete-100.png"
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
     Mymenu{
         id:menu
@@ -181,8 +178,9 @@ Rectangle{
 
     }
     MyFooter{
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 3
+        id : footer
+        anchors.top: dataGridView.bottom
+        anchors.bottomMargin:-1
     }
 
 
