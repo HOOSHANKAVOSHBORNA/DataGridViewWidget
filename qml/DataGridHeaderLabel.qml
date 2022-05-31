@@ -4,7 +4,7 @@ import QtQuick.Controls 2.13
 Item {
     id: cell
     property alias text: label.text
-    property int w: handler.x + handler.width
+    property int w: dataGridView.width /3.1
     width: handler.x + handler.width + 4
 
     property int initialWidth: 0

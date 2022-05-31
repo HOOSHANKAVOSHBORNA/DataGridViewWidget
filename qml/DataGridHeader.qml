@@ -6,7 +6,7 @@ import QtQuick.Controls 2.5
 import QtQml.Models 2.12
 Rectangle {
     property color borderColor: 'gray'
-    color: backgroundColor
+    color: backgroundColor1
     property alias columns: repeater.model
     property var sizes: []
     property bool isReady: false

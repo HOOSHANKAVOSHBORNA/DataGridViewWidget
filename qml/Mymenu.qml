@@ -11,7 +11,7 @@ Rectangle {
     property bool showTowColumnMenu: name.checked
     property bool showoneColumnMenu: id.checked
 
-    property bool  fitCheckbox: true
+    property bool  fitCheckbox: false
     property color colorclom
     radius: 5
     //border.width: 1

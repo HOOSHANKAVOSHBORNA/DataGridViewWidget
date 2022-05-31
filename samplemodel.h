@@ -26,7 +26,8 @@ public slots:
     void getCount(int count) ;
     void getNameSearch (QString name);
     void onClickedcurrentindex(int  index);
-    void searchFilter(QString string);
+    void onclickgetid(int id);
+    void searchFilter(QString string, QList<bool> b1);
 
 
 

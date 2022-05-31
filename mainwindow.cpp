@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     Form1 *form = new Form1;
     UI_GridView *Ui = new UI_GridView;
     QStandardItemModel* cppmodel = new QStandardItemModel();
+    SampleModel *model = new SampleModel;
 
     qmlRegisterType<SampleModel>("Test", 1, 0, "SampleModel");
     view= new QQuickView(QUrl(QLatin1String("qrc:/qml/main.qml")));

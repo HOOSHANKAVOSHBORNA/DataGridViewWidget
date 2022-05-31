@@ -71,6 +71,11 @@ void SampleModel::onClickedcurrentindex(int index)
     qDebug()<<index;
 }
 
+void SampleModel::onclickgetid(int id)
+{
+    qDebug()<<id;
+}
+
 
 
 
@@ -205,7 +210,7 @@ QString SampleModel::getSampleString() const
     return ret;
 }
 
-void SampleModel::searchFilter(QString string)
+void SampleModel::searchFilter(QString string,QList<bool> b1 )
 {
     dataID.clear();
     dataName.clear();
@@ -213,46 +218,57 @@ void SampleModel::searchFilter(QString string)
     if(string.isEmpty()){
         loadSampel();
         return;}
-    if (namesearch=="ID"){
-        //qDebug()<<"ID";
-        for (int i=0;i<count;++i) {
-            if (get_ID(i).contains(string)){
-                dataID.append(get_ID(i));
-                dataName.append(get_name(i));
-                dataLastname.append(get_lastname(i));
+    qDebug()<<b1[0];
+//     if (namesearch==""){
+//         for (int i=0;i <count;++i) {
+//             if (get_ID(i).contains(string) or get_name(i).contains(string) or get_lastname(i).contains(string)) {
+//                 dataID.append(get_ID(i));
+//                 dataName.append(get_name(i));
+//                 dataLastname.append(get_lastname(i));
+//             }
+//         }
+//     }
+//    else if (namesearch=="ID"){
 
-            }
-        }
-    }
-    else if (namesearch=="Name") {
-        for (int i=0;i<count;++i) {
-            if (get_name(i).contains(string)){
-                dataID.append(get_ID(i));
-                dataName.append(get_name(i));
-                dataLastname.append(get_lastname(i));
-            }
-        }
-    }
-    else {
-        for (int i=0;i<count;++i) {
-            if (get_lastname(i).contains(string)){
-                dataID.append(get_ID(i));
-                dataName.append(get_name(i));
-                dataLastname.append(get_lastname(i));
-            }
-        }
-    }
-    this->beginResetModel();
-    this->clear();
-    count =dataID.size();
-    for (int i =0;i<count;++i) {
-        row = new QStandardItem;
-        row->setData(dataID[i],IdRole);
-        row->setData(dataName[i],NameRole);
-        row->setData(dataLastname[i],LastNameRole);
-        this->appendRow(row);
-    }
-    //this->fillSampleData();
-    this->endResetModel();
+//        //qDebug()<<"ID";
+//        for (int i=0;i<count;++i) {
+//            if (get_ID(i).contains(string)){
+//                dataID.append(get_ID(i));
+//                dataName.append(get_name(i));
+//                dataLastname.append(get_lastname(i));
+
+//            }
+//        }
+//    }
+//    else if (namesearch=="Name") {
+//        for (int i=0;i<count;++i) {
+//            if (get_name(i).contains(string)){
+//                dataID.append(get_ID(i));
+//                dataName.append(get_name(i));
+//                dataLastname.append(get_lastname(i));
+//            }
+//        }
+//    }
+//    else {
+//        for (int i=0;i<count;++i) {
+//            if (get_lastname(i).contains(string)){
+//                dataID.append(get_ID(i));
+//                dataName.append(get_name(i));
+//                dataLastname.append(get_lastname(i));
+//            }
+//        }
+//    }
+//    this->beginResetModel();
+//    this->clear();
+//    count =dataID.size();
+//    for (int i =0;i<count;++i) {
+//        row = new QStandardItem;
+//        row->setData(dataID[i],IdRole);
+//        row->setData(dataName[i],NameRole);
+//        row->setData(dataLastname[i],LastNameRole);
+//        this->appendRow(row);
+//    }
+//    //this->fillSampleData();
+//    this->endResetModel();
 
 }

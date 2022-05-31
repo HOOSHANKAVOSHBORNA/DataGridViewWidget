@@ -85,6 +85,8 @@ Rectangle{
 
         onRowClicked: {
             sampleModel.onClickedcurrentindex(currentIndex)
+            sampleModel.onclickgetid(model.id)
+
         }
 
 

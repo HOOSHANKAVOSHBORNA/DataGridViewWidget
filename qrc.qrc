@@ -47,5 +47,6 @@
         <file>Font/Times New Roman/times new roman italic.ttf</file>
         <file>Font/Times New Roman/times new roman.ttf</file>
         <file>icon/icons8-triangle-arrow-24.png</file>
+        <file>icon/icons8-triangle-arrow-241.png</file>
     </qresource>
 </RCC>
