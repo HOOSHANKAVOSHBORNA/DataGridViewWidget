@@ -3,31 +3,25 @@
 #include "samplemodel.h"
 #include <QQuickStyle>
 #include <form1.h>
-#include "ui_gridview.h"
+#include <QQmlContext>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    Form1 *form = new Form1;
-    UI_GridView *Ui = new UI_GridView;
-    QStandardItemModel* cppmodel = new QStandardItemModel();
-    SampleModel *model = new SampleModel;
-
     qmlRegisterType<SampleModel>("Test", 1, 0, "SampleModel");
     view= new QQuickView(QUrl(QLatin1String("qrc:/qml/main.qml")));
-    view->engine()->rootContext()->setContextProperty("form",form);
-    view->engine()->rootContext()->setContextProperty("form",cppmodel);
     ///UI
-    //Ui->setGradiantColor1("yellow");
+    //Ui.setGradiantColor1("yellow");
     //Ui->setGradiantColor2("white");
     //Ui->setBordercolor("yellow");
     //Ui->setFontcolor("yellow");
     //Ui->setFontszie_col(12);
-    Ui->setFontsizeHedear(16);
-    view->engine()->rootContext()->setContextProperty("Ui",Ui);
+    Ui.setFontsizeHedear(16);
+    view->rootContext()->setContextProperty("ui",&Ui);
     ///set qml to widget
     qmlwidget=QWidget::createWindowContainer(view);
+
     /// horizontalLayout creat in ui
     ui->horizontalLayout->addWidget(qmlwidget);
 

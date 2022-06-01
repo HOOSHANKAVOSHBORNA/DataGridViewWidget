@@ -90,7 +90,7 @@ Rectangle {
                         width: {
                             var _w = 0
                             for (var i = 0; i < repeater.count; ++i)
-                                _w += repeater.itemAt(i).width
+                                //_w += repeater.itemAt(i).width
                             return _w;
                         }
                     }

@@ -4,4 +4,4 @@
 
 
 *custom file gridview  for widget*
-![sampel](./Pic.png "sampel")
+![sampel](./Pic2.png "sampel")

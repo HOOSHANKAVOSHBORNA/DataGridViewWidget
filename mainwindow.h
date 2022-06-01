@@ -7,6 +7,7 @@
 #include <QWidget>
 #include <QQmlContext>
 #include <QQmlEngine>
+#include "ui_gridview.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -27,5 +28,6 @@ private:
     QQuickView *view;
     // class widget for display qml
     QWidget *qmlwidget;
+    UI_GridView Ui;
 };
 #endif // MAINWINDOW_H
