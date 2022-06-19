@@ -14,13 +14,13 @@
 SampleModel::SampleModel(QObject *parent) : QStandardItemModel(parent)
 {
 
-    this->clear();
+
     fillSampleData();
 }
 
 SampleModel::~SampleModel()
 {
-    //qDeleteAll(_data);
+    //qDeleteAll(m_TableData);
 }
 
 int SampleModel::rowCount(const QModelIndex &parent) const
@@ -32,25 +32,25 @@ int SampleModel::rowCount(const QModelIndex &parent) const
 
 QString SampleModel::get_name(int i) const
 {
-    QModelIndex it =index(i,0);
-    QString b =data(it, NameRole).toString();
-    return  b;
+//    QModelIndex it =index(i,0);
+//    QString b =data(it, ).toString();
+//    return  b;
 
 
 }
 
 QString SampleModel::get_lastname(int i) const
 {
-    QModelIndex it =index(i,0);
-    QString b = data(it, LastNameRole).toString();
-    return  b;
+//    QModelIndex it =index(i,0);
+//    QString b = data(it, LastNameRole).toString();
+//    return  b;
 }
 
 QString SampleModel::get_ID(int i) const
 {
-    QModelIndex it =index(i,0);
-    QString b = data(it, IdRole).toString();
-    return  b;
+//    QModelIndex it =index(i,0);
+//    QString b = data(it, IdRole).toString();
+//    return  b;
 }
 
 void SampleModel::getCount(int t)
@@ -99,91 +99,132 @@ void SampleModel::loadcountsampel()
 
 QHash<int, QByteArray> SampleModel::roleNames() const
 {
-    return {
-        {IdRole, "id"},
-        {NameRole, "name"},
-        {LastNameRole, "last_name"}
+//    return {
+//           {IdRole, "id"},
+//           {NameRole, "name"},
+//           {LastNameRole, "last_name"}
 
-    };
+//       };
+    QHash<int, QByteArray> roles = QStandardItemModel::roleNames();
+
+      // Should not overwrite existing roles
+      int LastIndexOfUserRole = Qt::UserRole;
+      for (int x = 1; x <= m_ColumnHeadings.count(); x++)
+      {
+         roles[LastIndexOfUserRole + x] = m_ColumnHeadings.at(x-1).toUtf8();
+      }
+      return roles;
+
+}
+
+void SampleModel::setColumnHeadings(const QList<QString> &ColumnHeadings)
+{
+    m_ColumnHeadings =ColumnHeadings;
+}
+
+
+
+QStringList SampleModel::userRoleNames()
+{
+    QHashIterator<int, QByteArray> i(roleNames());
+     while (i.hasNext())
+     {
+        i.next();
+        if(i.key() > Qt::UserRole)
+        {
+            m_roleNames[i.key()] = i.value();
+        }
+     }
+     return m_roleNames.values();
 }
 
 
 
 void SampleModel::onClickedpdf()
 {
-    QTextDocument *doc = new QTextDocument;
-    doc->setDocumentMargin(10);
-    QTextCursor cursor(doc);
-    QTextTable *table = cursor.insertTable(count, 3);
-    QTextTableCell headerCell = table->cellAt(0, 0);
-    QTextCursor headerCellCursor = headerCell.firstCursorPosition();
-    headerCellCursor.insertText(QObject::tr("ID"));
-    headerCell = table->cellAt(0, 1);
-    headerCellCursor = headerCell.firstCursorPosition();
-    headerCellCursor.insertText(QObject::tr("Name"));
-    headerCell = table->cellAt(0, 2);
-    headerCellCursor = headerCell.firstCursorPosition();
-    headerCellCursor.insertText(QObject::tr("LastName"));
-    for(int i = 0; i <count-1; ++i){
-        //QTextCharFormat cellFormat = i % 2 == 0 ? textFormat : alternateCellFormat;
-        QTextTableCell cell = table->cellAt(i + 1, 0);
-        //cell.setFormat(cellFormat);
-        QTextCursor cellCursor = cell.firstCursorPosition();
-        QModelIndex it =index(i,0);
-        cellCursor.insertText(data(it, IdRole).toString());
+//    QTextDocument *doc = new QTextDocument;
+//    doc->setDocumentMargin(10);
+//    QTextCursor cursor(doc);
+//    QTextTable *table = cursor.insertTable(count, 3);
+//    QTextTableCell headerCell = table->cellAt(0, 0);
+//    QTextCursor headerCellCursor = headerCell.firstCursorPosition();
+//    headerCellCursor.insertText(QObject::tr("ID"));
+//    headerCell = table->cellAt(0, 1);
+//    headerCellCursor = headerCell.firstCursorPosition();
+//    headerCellCursor.insertText(QObject::tr("Name"));
+//    headerCell = table->cellAt(0, 2);
+//    headerCellCursor = headerCell.firstCursorPosition();
+//    headerCellCursor.insertText(QObject::tr("LastName"));
+//    for(int i = 0; i <count-1; ++i){
+//        //QTextCharFormat cellFormat = i % 2 == 0 ? textFormat : alternateCellFormat;
+//        QTextTableCell cell = table->cellAt(i + 1, 0);
+//        //cell.setFormat(cellFormat);
+//        QTextCursor cellCursor = cell.firstCursorPosition();
+//        QModelIndex it =index(i,0);
+//        cellCursor.insertText(data(it, IdRole).toString());
 
-        cell = table->cellAt(i + 1, 1);
-        //cell.setFormat(cellFormat);
-        cellCursor = cell.firstCursorPosition();
-        QModelIndex it1 =index(i,0);
-        cellCursor.insertText(data(it1, NameRole).toString());
-        cell = table->cellAt(i + 1, 2);
-        //cell.setFormat(cellFormat);
-        cellCursor = cell.firstCursorPosition();
-        QModelIndex it2 =index(i,0);
-        cellCursor.insertText(data(it2, LastNameRole).toString());
-    }
+//        cell = table->cellAt(i + 1, 1);
+//        //cell.setFormat(cellFormat);
+//        cellCursor = cell.firstCursorPosition();
+//        QModelIndex it1 =index(i,0);
+//        cellCursor.insertText(data(it1, NameRole).toString());
+//        cell = table->cellAt(i + 1, 2);
+//        //cell.setFormat(cellFormat);
+//        cellCursor = cell.firstCursorPosition();
+//        QModelIndex it2 =index(i,0);
+//        cellCursor.insertText(data(it2, LastNameRole).toString());
+//    }
 
-    cursor.movePosition(QTextCursor::End);
-    cursor.insertBlock();
+//    cursor.movePosition(QTextCursor::End);
+//    cursor.insertBlock();
 
-    //Print to PDF
-    QString fname = QFileDialog::getSaveFileName(nullptr, "Save name", ".", "Pdf File (*.pdf)" );
-    QPrinter printer(QPrinter::HighResolution) ;
-    printer.setOutputFormat(QPrinter::PdfFormat);
-    printer.setOutputFileName(fname);
-    doc->print(&printer);
+//    //Print to PDF
+//    QString fname = QFileDialog::getSaveFileName(nullptr, "Save name", ".", "Pdf File (*.pdf)" );
+//    QPrinter printer(QPrinter::HighResolution) ;
+//    printer.setOutputFormat(QPrinter::PdfFormat);
+//    printer.setOutputFileName(fname);
+//    doc->print(&printer);
 
 }
 
 void SampleModel::onClickedexel()
 {
-    QString textdata;
+//    QString textdata;
 
-    for (int i=0;i<count;++i) {
+//    for (int i=0;i<count;++i) {
 
-        textdata+=data(index(i,0),IdRole).toString();
-        textdata+=" ,";
-        textdata+=data(index(i,0),NameRole).toString();
-        textdata+=" ,";
-        textdata+=data(index(i,0),LastNameRole).toString();
-        textdata+=" ,";
-        textdata+ "\n";
-    }
-    QString fname = QFileDialog::getSaveFileName(nullptr, "Save name", ".", "Csv File (*.csv)" );
-    QFile csvFile(fname);
-    if(csvFile.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+//        textdata+=data(index(i,0),IdRole).toString();
+//        textdata+=" ,";
+//        textdata+=data(index(i,0),NameRole).toString();
+//        textdata+=" ,";
+//        textdata+=data(index(i,0),LastNameRole).toString();
+//        textdata+=" ,";
+//        textdata+ "\n";
+//    }
+//    QString fname = QFileDialog::getSaveFileName(nullptr, "Save name", ".", "Csv File (*.csv)" );
+//    QFile csvFile(fname);
+//    if(csvFile.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
 
-        QTextStream out(&csvFile);
-        out << textdata;
-    }
-    csvFile.close();
+//        QTextStream out(&csvFile);
+//        out << textdata;
+//    }
+//    csvFile.close();
 }
 
 
 
 void SampleModel::fillSampleData()
 {
+//      m_Headings << "Heading1" << "Heading2" << "Heading3" << "Heading4";
+//      setColumnHeadings(m_Headings);
+//      QHash<QString, QVariant> tempHash;
+//       int counter = 1;
+//       for (auto x : m_Headings)
+//       {
+//         tempHash.insert(x, QString::number(counter));
+//         counter++;
+//       }
+//      addElement(tempHash);
     for (int i = 1; i <= 100; ++i) {
         row = new QStandardItem;
         row->setData(i,IdRole);

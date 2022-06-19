@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import Test 1.0
+//import Test 1.0
 import QtQuick.Controls 2.12
 Rectangle {
     id: rectangle1
@@ -27,11 +27,11 @@ Rectangle {
             anchors.left: parent.left
 
             onActivated: {
-                sampleModel.getCount(styleSelector.currentText)
-                sampleModel.loadcountsampel();
+                samplemodel.getCount(styleSelector.currentText)
+                samplemodel.loadcountsampel();
                 //console.log(dataGridView.get(12))
             }
-            model: [Math.round(sampleModel.rowCount()),Math.round(sampleModel.rowCount()/2),Math.round(sampleModel.rowCount()/4) ,Math.round(sampleModel.rowCount()/8)]
+            model: [Math.round(samplemodel.rowCount()),Math.round(samplemodel.rowCount()/2),Math.round(samplemodel.rowCount()/4) ,Math.round(samplemodel.rowCount()/8)]
             delegate: ItemDelegate {
                 width: styleSelector.width *6
                 contentItem: Text {

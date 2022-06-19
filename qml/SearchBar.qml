@@ -10,7 +10,7 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Dialogs 1.2
 
 Rectangle{
-     property var namesearch:[]
+    property var namesearch:[]
     Component.onCompleted: {
         function f (){
             for (var i=0 ;i< 3;i++){
@@ -108,93 +108,57 @@ Rectangle{
 
         color: "#88000000"
         width: 150
-        height: 300
+        height: 200
+        ListModel{
+            id: listModel
+            dynamicRoles: true
 
-        ColumnLayout {
-            anchors.fill: parent
-            CheckBox {
-                id : id
-                indicator: Rectangle {
-                    implicitWidth: 24
-                    implicitHeight: 24
-
-                    x: id.leftPadding
-                    y: parent.height / 2 - height / 2
-                    radius: 5
-                    border.color: id.down ? "#2980b9" : "#2980b9"
-
-                    Text {
-                        width: 14
-                        height: 14
-                        x: 1
-                        y: -2
-                        text: "✔"
-                        font.pointSize: 18
-                        color: id.down ? "#2980b9" : "#2980b9"
-                        visible: id.checked
-                    }
+            Component.onCompleted: {
+                var listcolumn = listrol
+                for(var i in listcolumn){
+                    var column = listcolumn[i]
+                    listModel.append({"name": column, "checked": true})
                 }
-
-                onClicked:{
-                    namesearch[0]=id.checked
-                }
-
-                text: "<font color=\"white\">ID</font>"
-
-            }
-            CheckBox {
-                id : name
-                indicator: Rectangle {
-                    implicitWidth: 24
-                    implicitHeight: 24
-
-                    x: name.leftPadding
-                    y: parent.height / 2 - height / 2
-                    radius: 5
-                    border.color: name.down ? "#2980b9" : "#2980b9"
-
-                    Text {
-                        width: 14
-                        height: 14
-                        x: 1
-                        y: -2
-                        text: "✔"
-                        font.pointSize: 18
-                        color: name.down ? "#2980b9" : "#2980b9"
-                        visible: name.checked
-                    }
-                }
-
-                text: "<font color=\"white\">Name</font>"
-                onClicked: namesearch[1]=name.checked
-            }
-            CheckBox {
-                id : lastname
-                indicator: Rectangle {
-                    implicitWidth: 24
-                    implicitHeight: 24
-
-                    x: lastname.leftPadding
-                    y: parent.height / 2 - height / 2
-                    radius: 5
-                    border.color: lastname.down ? "#2980b9" : "#2980b9"
-
-                    Text {
-                        width: 14
-                        height: 14
-                        x: 1
-                        y: -2
-                        text: "✔"
-                        font.pointSize: 18
-                        color: lastname.down ? "#2980b9" : "#2980b9"
-                        visible: lastname.checked
-                    }
-                }
-
-                text: "<font color=\"white\">LastName</font>"
-                onClicked: namesearch[2]=lastname.checked
             }
         }
+
+        ListView {
+            id: multiSelectCheckList
+            model: listModel
+            height: parent.height -100
+            width: parent.width
+            anchors {
+                top: parent.top
+                margins: 10
+            }
+
+            delegate: CheckBox {
+                id: modelCheckBoxes
+                checked: model.checked
+                text:"<font color=\"white\">"+model.name+"</font>"
+                indicator: Rectangle {
+                    implicitWidth: 24
+                    implicitHeight: 24
+
+                    x: modelCheckBoxes.leftPadding
+                    y: parent.height / 2 - height / 2
+                    radius: 5
+                    border.color: modelCheckBoxes.down ? "#2980b9" : "#2980b9"
+
+                    Text {
+                        width: 14
+                        height: 14
+                        x: 1
+                        y: -2
+                        text: "✔"
+                        font.pointSize: 18
+                        color: modelCheckBoxes.down ? "#2980b9" : "#2980b9"
+                        visible: modelCheckBoxes.checked
+                    }
+                }
+            }
+        }
+
 
     }
     TextInput{

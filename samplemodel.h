@@ -6,17 +6,21 @@
 class SampleModel : public QStandardItemModel
 {
     Q_OBJECT
+      Q_PROPERTY(QStringList userRoleName READ userRoleNames CONSTANT)
 public:
     explicit SampleModel(QObject *parent = nullptr);
     ~SampleModel();
     int rowCount(const QModelIndex &parent) const override;
-     Q_INVOKABLE QString get_name(int i) const ;
+    Q_INVOKABLE QString get_name(int i) const ;
     Q_INVOKABLE QString get_lastname(int i) const ;
-     Q_INVOKABLE QString get_ID(int i) const ;
+    Q_INVOKABLE QString get_ID(int i) const ;
     Q_INVOKABLE void loadSampel();
     Q_INVOKABLE void loadcountsampel();
     QHash<int, QByteArray> roleNames() const override;
     void Search (QString name);
+    void setColumnHeadings(const QList<QString> &ColumnHeadings);
+    QStringList userRoleNames();
+
 signals:
     void countChanged(int c);
 
@@ -32,21 +36,27 @@ public slots:
 
 
 
+
 private:
-    enum Roles {
-        IdRole = Qt::UserRole + 1,
-        NameRole,
-        LastNameRole
-    };
+        enum Roles {
+            IdRole = Qt::UserRole + 1,
+            NameRole,
+            LastNameRole
+        };
+
     QStandardItem *row;
     void fillSampleData();
     QString getSampleString() const;
-     QSortFilterProxyModel *proxyModel;
     int count=100;
     QString namesearch = "ID";
     QList <QString> dataID;
     QList <QString> dataName;
     QList <QString> dataLastname;
+    QList<QString> m_Headings;
+    QList<QString> m_ColumnHeadings={"id","name","lasr_name"} ;
+    QMap<int, QString> m_roleNames;
+    QStringList userRoleName;
+
 
 };
 

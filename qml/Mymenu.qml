@@ -7,9 +7,9 @@ import QtQuick.Controls.Styles 1.4
 Rectangle {
     property bool  horizontalLinesCheckbox: horzent.checked
     property  bool verticalLinesCheckbox: vertical.checked
-    property bool showThirdColumnMenu: lastname.checked
-    property bool showTowColumnMenu: name.checked
-    property bool showoneColumnMenu: id.checked
+    property bool showThirdColumnMenu: true//lastname.checked
+    property bool showTowColumnMenu: true//name.checked
+    property bool showoneColumnMenu: true//id.checked
 
     property bool  fitCheckbox: false
     property color colorclom
@@ -91,17 +91,181 @@ Rectangle {
         width: 150
         height: 300
 
-        ColumnLayout {
-            CheckBox {
-                id : id
+        //        ColumnLayout {
+        //            CheckBox {
+        //                id : id
+        //                indicator: Rectangle {
+        //                    implicitWidth: 24
+        //                    implicitHeight: 24
+
+        //                    x: id.leftPadding
+        //                    y: parent.height / 2 - height / 2
+        //                    radius: 5
+        //                    border.color: id.down ? "#2980b9" : "#2980b9"
+
+        //                    Text {
+        //                        width: 14
+        //                        height: 14
+        //                        x: 1
+        //                        y: -2
+        //                        text: "✔"
+        //                        font.pointSize: 18
+        //                        color: id.down ? "#2980b9" : "#2980b9"
+        //                        visible: id.checked
+        //                    }
+        //                }
+
+        //                checked: true
+        //                text: "<font color=\"white\">ID</font>"
+
+        //            }
+        //            CheckBox {
+        //                id : name
+        //                indicator: Rectangle {
+        //                    implicitWidth: 24
+        //                    implicitHeight: 24
+
+        //                    x: name.leftPadding
+        //                    y: parent.height / 2 - height / 2
+        //                    radius: 5
+        //                    border.color: name.down ? "#2980b9" : "#2980b9"
+
+        //                    Text {
+        //                        width: 14
+        //                        height: 14
+        //                        x: 1
+        //                        y: -2
+        //                        text: "✔"
+        //                        font.pointSize: 18
+        //                        color: name.down ? "#2980b9" : "#2980b9"
+        //                        visible: name.checked
+        //                    }
+        //                }
+
+        //                checked: true
+        //                text: "<font color=\"white\">Name</font>"
+        //            }
+        //            CheckBox {
+        //                id : lastname
+        //                indicator: Rectangle {
+        //                    implicitWidth: 24
+        //                    implicitHeight: 24
+
+        //                    x: lastname.leftPadding
+        //                    y: parent.height / 2 - height / 2
+        //                    radius: 5
+        //                    border.color: lastname.down ? "#2980b9" : "#2980b9"
+
+        //                    Text {
+        //                        width: 14
+        //                        height: 14
+        //                        x: 1
+        //                        y: -2
+        //                        text: "✔"
+        //                        font.pointSize: 18
+        //                        color: lastname.down ? "#2980b9" : "#2980b9"
+        //                        visible: lastname.checked
+        //                    }
+        //                }
+
+        //                checked: true
+        //                text: "<font color=\"white\">LastName</font>"
+        //            }
+
+
+        //        }
+        ListModel{
+            id: listModel
+            dynamicRoles: true
+
+            Component.onCompleted: {
+                var listcolumn = listrol
+                for(var i in listcolumn){
+                    var column = listcolumn[i]
+                    listModel.append({"name": column, "checked": true})
+                }
+            }
+        }
+        CheckBox {
+            id: vertical
+            indicator: Rectangle {
+                implicitWidth: 24
+                implicitHeight: 24
+
+                x: vertical.leftPadding
+                y: parent.height / 2 - height / 2
+                radius: 5
+                border.color: vertical.down ? "#2980b9" : "#2980b9"
+
+                Text {
+                    width: 14
+                    height: 14
+                    x: 1
+                    y: -2
+                    text: "✔"
+                    font.pointSize: 18
+                    color: vertical.down ? "#2980b9" : "#2980b9"
+                    visible: vertical.checked
+                }
+            }
+            checked: true
+            text: "<font color=\"white\">Vertical lines</font>"
+
+
+        }
+        CheckBox {
+            id: horzent
+            anchors {
+                top: vertical.bottom
+                margins: 1
+            }
+            indicator: Rectangle {
+                implicitWidth: 24
+                implicitHeight: 24
+
+                x: horzent.leftPadding
+                y: parent.height / 2 - height / 2
+                radius: 5
+                border.color: horzent.down ? "#2980b9" : "#2980b9"
+
+                Text {
+                    width: 14
+                    height: 14
+                    x: 1
+                    y: -2
+                    text: "✔"
+                    font.pointSize: 18
+                    color: horzent.down ? "#2980b9" : "#2980b9"
+                    visible: horzent.checked
+                }
+            }
+            checked: true
+            text: "<font color=\"white\">Horizontal lines</font>"
+
+
+        }
+        ListView {
+            id: multiSelectCheckList
+            model: listModel
+            height: parent.height -100
+            width: parent.width
+            anchors {
+                top: horzent.bottom
+                margins: 10
+            }
+
+            delegate: CheckBox {
+                id: modelCheckBoxes
+                checked: model.checked
+                text:"<font color=\"white\">"+model.name+"</font>"
                 indicator: Rectangle {
                     implicitWidth: 24
                     implicitHeight: 24
 
-                    x: id.leftPadding
+                    x: modelCheckBoxes.leftPadding
                     y: parent.height / 2 - height / 2
                     radius: 5
-                    border.color: id.down ? "#2980b9" : "#2980b9"
+                    border.color: modelCheckBoxes.down ? "#2980b9" : "#2980b9"
 
                     Text {
                         width: 14
@@ -110,121 +274,11 @@ Rectangle {
                         y: -2
                         text: "✔"
                         font.pointSize: 18
-                        color: id.down ? "#2980b9" : "#2980b9"
-                        visible: id.checked
+                        color: modelCheckBoxes.down ? "#2980b9" : "#2980b9"
+                        visible: modelCheckBoxes.checked
                     }
                 }
-
-                checked: true
-                text: "<font color=\"white\">ID</font>"
-
             }
-            CheckBox {
-                id : name
-                indicator: Rectangle {
-                    implicitWidth: 24
-                    implicitHeight: 24
-
-                    x: name.leftPadding
-                    y: parent.height / 2 - height / 2
-                    radius: 5
-                    border.color: name.down ? "#2980b9" : "#2980b9"
-
-                    Text {
-                        width: 14
-                        height: 14
-                        x: 1
-                        y: -2
-                        text: "✔"
-                        font.pointSize: 18
-                        color: name.down ? "#2980b9" : "#2980b9"
-                        visible: name.checked
-                    }
-                }
-
-                checked: true
-                text: "<font color=\"white\">Name</font>"
-            }
-            CheckBox {
-                id : lastname
-                indicator: Rectangle {
-                    implicitWidth: 24
-                    implicitHeight: 24
-
-                    x: lastname.leftPadding
-                    y: parent.height / 2 - height / 2
-                    radius: 5
-                    border.color: lastname.down ? "#2980b9" : "#2980b9"
-
-                    Text {
-                        width: 14
-                        height: 14
-                        x: 1
-                        y: -2
-                        text: "✔"
-                        font.pointSize: 18
-                        color: lastname.down ? "#2980b9" : "#2980b9"
-                        visible: lastname.checked
-                    }
-                }
-
-                checked: true
-                text: "<font color=\"white\">LastName</font>"
-            }
-            CheckBox {
-                id : horzent
-                indicator: Rectangle {
-                    implicitWidth: 24
-                    implicitHeight: 24
-
-                    x: horzent.leftPadding
-                    y: parent.height / 2 - height / 2
-                    radius: 5
-                    border.color: horzent.down ? "#2980b9" : "#2980b9"
-
-                    Text {
-                        width: 14
-                        height: 14
-                        x: 1
-                        y: -2
-                        text: "✔"
-                        font.pointSize: 18
-                        color: horzent.down ? "#2980b9" : "#2980b9"
-                        visible: horzent.checked
-                    }
-                }
-
-                checked: true
-                text: "<font color=\"white\">Horizontal lines</font>"
-            }
-            CheckBox {
-                id : vertical
-                indicator: Rectangle {
-                    implicitWidth: 24
-                    implicitHeight: 24
-
-                    x: vertical.leftPadding
-                    y: parent.height / 2 - height / 2
-                    radius: 5
-                    border.color: vertical.down ? "#2980b9" : "#2980b9"
-
-                    Text {
-                        width: 14
-                        height: 14
-                        x: 1
-                        y: -2
-                        text: "✔"
-                        font.pointSize: 18
-                        color: vertical.down ? "#2980b9" : "#2980b9"
-                        visible: vertical.checked
-                    }
-                }
-
-                checked: true
-                text: "<font color=\"white\">Vertical lines</font>"
-            }
-
-
         }
 
     }
@@ -332,8 +386,8 @@ Rectangle {
             anchors.fill: parent
             hoverEnabled: true
             onClicked: {
-             sampleModel.onClickedexel()
-            messagecsv.open()
+                sampleModel.onClickedexel()
+                messagecsv.open()
 
             }
             onEntered: {
@@ -360,131 +414,131 @@ Rectangle {
         width: 200
         anchors.verticalCenter: parent.verticalCenter
     }
-//    Rectangle{
-//        id: rectangle
-//        anchors.right:  searc.left
-//        anchors.rightMargin: 10
-//        width: 150
-//        height: 30
-//        radius: 15
-//        anchors.verticalCenter: parent.verticalCenter
-//        //anchors.verticalCenter: parent.verticalCenter
-//        color: "transparent"
-//        border.width: 1.2
-//        border.color: bordercolor
-//        ComboBox{
-//            id: combosearch
-//            anchors.verticalCenter: parent.verticalCenter
-//            anchors.right: parent.right
-//            anchors.left: parent.left
+    //    Rectangle{
+    //        id: rectangle
+    //        anchors.right:  searc.left
+    //        anchors.rightMargin: 10
+    //        width: 150
+    //        height: 30
+    //        radius: 15
+    //        anchors.verticalCenter: parent.verticalCenter
+    //        //anchors.verticalCenter: parent.verticalCenter
+    //        color: "transparent"
+    //        border.width: 1.2
+    //        border.color: bordercolor
+    //        ComboBox{
+    //            id: combosearch
+    //            anchors.verticalCenter: parent.verticalCenter
+    //            anchors.right: parent.right
+    //            anchors.left: parent.left
 
-//            onActivated: {
-//                    sampleModel.getNameSearch(currentText)
-//            }
+    //            onActivated: {
+    //                    sampleModel.getNameSearch(currentText)
+    //            }
 
-//            model:["ID","Name","Lastname"]
-//            delegate: ItemDelegate {
-//                width: combosearch.width *6
-//                contentItem: Text {
-//                    text: modelData
-//                    color: fontcolor
+    //            model:["ID","Name","Lastname"]
+    //            delegate: ItemDelegate {
+    //                width: combosearch.width *6
+    //                contentItem: Text {
+    //                    text: modelData
+    //                    color: fontcolor
 
-//                   // elide: Text.ElideRight
-//                    //verticalAlignment: Text.AlignVCenter
-//                }
-//                background: Rectangle {
-//                    anchors.fill: parent
-//                    id:i
-//                    width: 50
-//                    color: "transparent"
-//                    radius: 20
-
-
-//                }
-//            }
-//            background: Rectangle {
-//                anchors.fill: parent
-//                color: "transparent"
-//                border.color: combosearch.pressed ? "#C0C0C0" : bordercolor
-//                border.width: combosearch.visualFocus ? 2 : 1
-//                radius: 30
-
-//            }
-
-//            popup: Popup{
-//                id:popup
-//                y: combosearch.height - 1
-//                width: combosearch.width
-//                height: combosearch.height * 6
-//                padding: 1
-//                enter: Transition {
-//                          NumberAnimation { property: "height"; duration: 1000;from: 0.0; to: combosearch.height * 6 }
-//                      }
-//                exit: Transition {
-//                          NumberAnimation { property: "height";duration: 1000 ;from: combosearch.height * 6 ; to: 0.0 }
-//                      }
-//                background: Rectangle {
-//                    radius: 5
-//                    anchors.fill: parent
-//                    color: "#88000000"
-//                    border.width: 1
-//                    border.color:bordercolor
-//                }
-//                contentItem: ListView {
-
-//                    id: listview
-
-//                    implicitHeight: popup.height
-//                    clip: true
-//                    model:combosearch.delegateModel
-//                    currentIndex: combosearch.highlightedIndex
-//                    interactive: true
-//                    highlightMoveDuration: 5
-//                    boundsBehavior: ListView.StopAtBounds
-//                    highlight: highlight
+    //                   // elide: Text.ElideRight
+    //                    //verticalAlignment: Text.AlignVCenter
+    //                }
+    //                background: Rectangle {
+    //                    anchors.fill: parent
+    //                    id:i
+    //                    width: 50
+    //                    color: "transparent"
+    //                    radius: 20
 
 
-//                    ScrollBar.vertical:ScrollBar {}
-//                }
+    //                }
+    //            }
+    //            background: Rectangle {
+    //                anchors.fill: parent
+    //                color: "transparent"
+    //                border.color: combosearch.pressed ? "#C0C0C0" : bordercolor
+    //                border.width: combosearch.visualFocus ? 2 : 1
+    //                radius: 30
 
-//            }
+    //            }
 
-//            Component {
-//                  id: highlight
-//                  Rectangle {
-//                      width: 10; height: 20
+    //            popup: Popup{
+    //                id:popup
+    //                y: combosearch.height - 1
+    //                width: combosearch.width
+    //                height: combosearch.height * 6
+    //                padding: 1
+    //                enter: Transition {
+    //                          NumberAnimation { property: "height"; duration: 1000;from: 0.0; to: combosearch.height * 6 }
+    //                      }
+    //                exit: Transition {
+    //                          NumberAnimation { property: "height";duration: 1000 ;from: combosearch.height * 6 ; to: 0.0 }
+    //                      }
+    //                background: Rectangle {
+    //                    radius: 5
+    //                    anchors.fill: parent
+    //                    color: "#88000000"
+    //                    border.width: 1
+    //                    border.color:bordercolor
+    //                }
+    //                contentItem: ListView {
 
-//                      color: "#11FFFFFF"; radius: 0
-//                      //y: listview.currentItem.y
-//                      Behavior on y {
-//                          SpringAnimation {
-//                              spring: 3
-//                              damping: 0.2
-//                          }
-//                      }
-//                  }
-//              }
-//        }
-//    }
+    //                    id: listview
 
-            MessageDialog {
+    //                    implicitHeight: popup.height
+    //                    clip: true
+    //                    model:combosearch.delegateModel
+    //                    currentIndex: combosearch.highlightedIndex
+    //                    interactive: true
+    //                    highlightMoveDuration: 5
+    //                    boundsBehavior: ListView.StopAtBounds
+    //                    highlight: highlight
 
-                id: messagepdf
-                title: "Information"
-                text: "creat pdf"
-                onAccepted: {
-                    Qt.quit()
-                }
+
+    //                    ScrollBar.vertical:ScrollBar {}
+    //                }
+
+    //            }
+
+    //            Component {
+    //                  id: highlight
+    //                  Rectangle {
+    //                      width: 10; height: 20
+
+    //                      color: "#11FFFFFF"; radius: 0
+    //                      //y: listview.currentItem.y
+    //                      Behavior on y {
+    //                          SpringAnimation {
+    //                              spring: 3
+    //                              damping: 0.2
+    //                          }
+    //                      }
+    //                  }
+    //              }
+    //        }
+    //    }
+
+    MessageDialog {
+
+        id: messagepdf
+        title: "Information"
+        text: "creat pdf"
+        onAccepted: {
+            Qt.quit()
         }
-            MessageDialog {
+    }
+    MessageDialog {
 
-                id: messagecsv
-                title: "Information"
-                text: "creat Csv"
-                onAccepted: {
-                    Qt.quit()
-                }
+        id: messagecsv
+        title: "Information"
+        text: "creat Csv"
+        onAccepted: {
+            Qt.quit()
         }
+    }
 
 
 
