@@ -1,4 +1,4 @@
-QT       += core gui quick quickcontrols2 quickwidgets printsupport
+QT       += core gui quick quickcontrols2 quickwidgets printsupport sql
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11

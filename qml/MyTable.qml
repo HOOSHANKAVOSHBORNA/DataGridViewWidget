@@ -1,11 +1,9 @@
 import QtQuick 2.12
-import Test 1.0
 import QtQuick.Controls.Material 2.12
-import QtQuick.Controls 2.12
+import QtQuick.Controls 2.4
 import QtQuick.Layouts 1.12
 import Qt.labs.settings 1.1
 import QtQuick.Controls.Styles 1.4
-import QtQuick.Controls 1.1
 Rectangle{
     id: rectangle
     anchors.fill: parent
@@ -14,11 +12,6 @@ Rectangle{
     property var listrol: samplemodel.userRoleName
 
 
-
-    SampleModel {
-        id: samplemodel
-
-    }
 
     Settings {
 
@@ -55,13 +48,6 @@ Rectangle{
 
     }
 
-    Component
-        {
-            id: columnC
-            TableViewColumn{width: 100
-
-              visible: true }
-        }
 
 //    DataGridView {
 
@@ -178,35 +164,6 @@ Rectangle{
 ////            }
 ////        }
     //}
-    TableView {
-                id: dataGridView
-                width: parent.width
-                height: parent.height -100
-                anchors.topMargin: 2
-                //anchors.fill: parent
-                anchors.top: menu.bottom
-                anchors.margins: 1
-
-                style: TableViewStyle{
-                    textColor: "white"
-
-                    backgroundColor:backgroundColor1
-                     alternateBackgroundColor:backgroundColor2
-                }
-            resources:
-            {
-                var roleList = samplemodel.userRoleName
-                var temp = []
-                for(var i = 0; i < roleList.length; i++)
-                {
-                    var role  = roleList[i]
-                    temp.push(columnC.createObject(dataGridView, { "role": role, "title": role}))
-                }
-                return temp
-            }
-            model: samplemodel
-        }
-
     Mymenu{
         id:menu
         width: parent.width
@@ -215,10 +172,83 @@ Rectangle{
         anchors.top: parent.top
 
     }
+    TableView {
+        id: tableView
+        height: parent.height -100
+        width: parent.width
+        anchors.bottom: footer.top
+        anchors.bottomMargin: 0
+        anchors.top: menu.bottom
+        anchors.topMargin: 0
+
+        columnWidthProvider: function (column) { return rectangle.width / table_model.columnCount(); }
+        rowHeightProvider: function (column) { return 60; }
+            leftMargin: rowsHeader.implicitWidth
+            topMargin: columnsHeader.implicitHeight
+            model: table_model
+            ScrollBar.horizontal: ScrollBar{}
+            ScrollBar.vertical: ScrollBar{}
+            delegate: Rectangle {
+                color: "transparent"
+
+                Text {
+                    text: display
+                    anchors.fill: parent
+                    anchors.margins: 10
+                    color: fontcolor
+                    font.pixelSize: 15
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+
+
+            Row {
+                id: columnsHeader
+                y: tableView.contentY
+                z: 2
+                Repeater {
+                    model: tableView.columns > 0 ? tableView.columns : 1
+                    Label {
+                        width: rectangle.width / table_model.columnCount()
+                        height: 35
+                        text: table_model.headerData(modelData, Qt.Horizontal)
+                        color: '#aaaaaa'
+                        font.pixelSize: 15
+                        padding: 10
+                        verticalAlignment: Text.AlignVCenter
+
+                        background: Rectangle { color: "transparent" }
+                    }
+                }
+            }
+            Column {
+                id: rowsHeader
+                x: tableView.contentX
+                z: 2
+                Repeater {
+                    Label {
+                        width: 60
+                        height: tableView.rowHeightProvider(modelData)
+                        text: table_model.headerData(modelData, Qt.Vertical)
+                        color: '#aaaaaa'
+                        font.pixelSize: 15
+                        padding: 10
+                        verticalAlignment: Text.AlignVCenter
+
+                        background: Rectangle { color: "#333333" }
+                    }
+                }
+            }
+
+            ScrollIndicator.horizontal: ScrollIndicator { }
+            ScrollIndicator.vertical: ScrollIndicator { }
+        }
+
+
     MyFooter{
         id : footer
-        anchors.top: dataGridView.bottom
-        anchors.bottomMargin:-1
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 0
     }
 
 
